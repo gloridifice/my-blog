@@ -5,6 +5,9 @@ import page.home
 import com.github.ajalt.mordant.rendering.TextColors.*
 import page.post
 import java.io.File
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.StandardCopyOption
 import kotlin.io.path.Path
 import kotlin.io.path.createParentDirectories
 
@@ -13,12 +16,19 @@ data class BlogContext(val client: NotionClient, val blogPages: List<BlogPage>) 
 }
 
 fun main(args: Array<String>) {
+    copyDir(Path("assets"), Path("static/assets"))
     notionClient { client ->
         val blogPages = getBlogPages(client)
         val context = BlogContext(client, blogPages);
 
         createHomePage(context)
         createPostPages(context)
+    }
+}
+fun copyDir(src: Path, dest: Path) {
+    Files.walk(src).forEach {
+        Files.copy(it, dest.resolve(src.relativize(it)),
+            StandardCopyOption.REPLACE_EXISTING)
     }
 }
 
