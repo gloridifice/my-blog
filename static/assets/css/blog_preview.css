@@ -1,4 +1,5 @@
 .post_preview{
+    max-width: 505px;
     position: relative;
     height: 81px;
     width: 100%;
@@ -10,7 +11,7 @@
     display: flex;
     justify-content: space-between;
 
-    margin: 14px 0;
+    margin: 14px auto;
 
     transition-duration: .2s;
     transition-property: outline-width, background-color, box-shadow;

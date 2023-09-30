@@ -3,7 +3,6 @@
 }
 *{
     box-sizing: border-box;
-    color: var(--text-color);
 }
 .header{
     position: sticky;
@@ -83,4 +82,14 @@ svg *{
     position: absolute;
 }
 .head_cover img{
+    width: 100%;
+    height: 480px;
+}
+
+.contents{
+    max-width: 600px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin: 42px auto auto;
 }

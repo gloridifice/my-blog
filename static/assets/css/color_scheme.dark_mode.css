@@ -1,14 +1,13 @@
 :root{
-    font-family: "Glow Sans SC", serif;
-
     --text-color: #3d3d3b;
     --emphasized-color: #000;
     --accents-color-1: #70706f;
     --accents-color-2: #adaba7;
     --accents-color-3: #d2d1ce;
     --theme-color: #c54c1c;
+    --theme-color-1: #e5683a;
     --reverse-text-color: #FFF;
-    --bg-color: #F1EEEB;
+    --bg-color: #181716;
     --navbar-bg-color: rgb(19 20 20/6%);
 
     --navbar-height: 49px;

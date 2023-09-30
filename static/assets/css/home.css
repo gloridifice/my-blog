@@ -1,22 +1,12 @@
-.contents_wrapper{
-    margin: auto;
-    max-width: 505px;
-    text-align: center;
-}
-.contents{
-    display: flex;
-    flex-direction: column;
-    margin-top: 42px;
-}
-.contents h1{
+.introduce h1{
     margin-bottom: 0;
 }
-.contents h2{
+.introduce h2{
     color: var(--theme-color);
     font-weight: 400;
     margin-top: 0;
 }
-.contents h3{
+.introduce h3{
     color: var(--accents-color-1);
     font-weight: 300;
 }
