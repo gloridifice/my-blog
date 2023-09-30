@@ -1,5 +1,5 @@
 :root{
-    --text-color: #3d3d3b;
+    --text-color: #2a2928;
     --emphasized-color: #000;
     --accents-color-1: #70706f;
     --accents-color-2: #adaba7;
@@ -13,4 +13,6 @@
     --navbar-height: 49px;
     --shadow-color-1: rgb(0 0 0/4%);
     --hlt-color-1: rgb(255 255 255/25%);
+
+    --head-cover-opacity: .75;
 }

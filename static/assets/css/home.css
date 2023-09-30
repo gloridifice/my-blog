@@ -1,5 +1,10 @@
+.introduce{
+    margin: 10px auto;
+}
+
 .introduce h1{
     margin-bottom: 0;
+    color: var(--emphasized-color);
 }
 .introduce h2{
     color: var(--theme-color);
@@ -13,11 +18,18 @@
 
 .title_icon svg *{
     transition: .2s fill;
-    fill: var(--text-color);
+    fill: var(--emphasized-color);
 }
 .title_icon svg:hover *{
     fill: var(--theme-color);
 }
+.blog_previews_wrapper{
+    margin: 10px auto;
+}
 .type_name{
+    width: fit-content;
+    margin: 0 auto;
     pointer-events: none;
+    color: var(--accents-color-2);
+    font-weight: 400;
 }

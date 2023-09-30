@@ -1,3 +1,7 @@
+:root{
+    color: var(--text-color);
+}
+
 .page_description{
     margin: 12px auto;
     max-width: 505px;
@@ -6,6 +10,7 @@
     padding: 16px 0;
     margin: 10px 0;
     border-bottom: solid var(--accents-color-2) 1px;
+    color: var(--emphasized-color);
 }
 .page_description .sub_info{
     display: flex;
@@ -22,6 +27,7 @@
 }
 .page_contents h1{
     text-align: center;
+    color: var(--emphasized-color);
 }
 .page_contents blockquote{
     margin: 0;
@@ -39,4 +45,6 @@
 }
 .page_contents h2{
     font-weight: 600;
+    border-bottom: dashed var(--theme-color) 2px;
+    width: fit-content;
 }

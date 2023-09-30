@@ -71,7 +71,7 @@ svg *{
 
 .head_cover{
     z-index: -1;
-    opacity: 0.75;
+    opacity: var(--head-cover-opacity);
     padding: 0;
     margin: 0;
     top: 0;
