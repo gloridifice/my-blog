@@ -2,7 +2,11 @@
   <head lang="zh_CN">
     <meta http-equiv="Content-Type" content="charset=utf-8">
     <script src="/assets/js/header.js"></script>
+    <link rel="stylesheet" href="/assets/css/reset.css">
     <link rel="stylesheet" href="/assets/css/root.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/layout.css">
     <link rel="stylesheet" href="/assets/css/post.css">
     <title>☁️ UI 设计与开发经验 [Unity] 2023.2.8 版</title>
@@ -25,13 +29,13 @@
       <div class="page_description">
         <h1 class="title">☁️ UI 设计与开发经验 [Unity] 2023.2.8 版</h1>
         <div class="sub_info">
-          <p class="date">2023-02-08</p>
+          <p class="date">2023-09-30</p>
           <p class="type">Dev</p>
         </div>
       </div>
       <div class="page_contents">
         <h1>
-          <t>前言：</t>
+          <t>前言</t>
         </h1>
         <blockquote>
           <t>自己是一名游戏开发进修中的学生，被朋友提醒，决定总结一下自己做游戏开发中的 UI 设计和开发经验，供自己快速回顾，也给在苦恼相同问题的伙伴一些参考。自己没有从业经验，本篇文章请当做无专业性的文章看待。如果有前辈能够给予指点，不甚感激。</t>
@@ -46,6 +50,66 @@
         <h2>
           <t>1. 在平面设计软件制作 UI 保真图</t>
         </h2>
+        <ul>
+          <li>
+            <t>在这个阶段与伙伴敲定一个可用的版本</t>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <t>一些草图杂乱，很多部分都是在游戏中优化完成</t>
+          </li>
+        </ul>
+        <div class="column_list">
+          <div class="column">
+            <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/Untitled.png">
+              <div class="caption">
+                <t>草图</t>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/QQ_E6_88_AA_E5_9B_BE20230214133518.png">
+              <div class="caption">
+                <t>成品</t>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column_list">
+          <div class="column">
+            <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/Untitled_1.png">
+              <div class="caption">
+                <t>草图</t>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/Untitled_2.png">
+              <div class="caption">
+                <t>成品</t>
+              </div>
+            </div>
+            <p></p>
+          </div>
+        </div>
+        <div class="column_list">
+          <div class="column">
+            <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/Untitled_3.png">
+              <div class="caption">
+                <t>草图</t>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/Untitled_4.png">
+              <div class="caption">
+                <t>成品</t>
+              </div>
+            </div>
+            <p></p>
+          </div>
+        </div>
         <h2>
           <t>2. 导出 UI 所需的图像素材</t>
         </h2>
@@ -76,6 +140,46 @@
         <p>
           <t>以下为例：</t>
         </p>
+        <ul>
+          <li>
+            <t>LevelUIManager (Canvas)</t>
+            <ul>
+              <li>
+                <t>ButtonsPanel (Panel)</t>
+                <ul>
+                  <li>
+                    <t>AButton</t>
+                  </li>
+                </ul>
+                <ul>
+                  <li>
+                    <t>BButton</t>
+                  </li>
+                </ul>
+                <ul>
+                  <li>
+                    <t>……</t>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <t>KeymapPanel</t>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <t>WinPanel</t>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <t>……</t>
+              </li>
+            </ul>
+          </li>
+        </ul>
         <p>
           <t>当某个面板的功能过多时，可能会将对一个面板的操作封装成一个脚本，挂在对应面板下。</t>
         </p>
@@ -105,6 +209,9 @@
         <p>
           <t>写好 UI 脚本后使用 CustomEditor 调整 UI 是十分方便的事。</t>
         </p>
+        <div class="bookmark"><a href="https://docs.unity3d.com/Manual/UIE-HowTo-CreateCustomInspector.html">https://docs.unity3d.com/Manual/UIE-HowTo-CreateCustomInspector.html</a>
+          <div class="url_detail"></div>
+        </div>
         <p>
           <t>不过使用预制体时使用 Editor 会出现无法将改变的参数保存的问题，自己找了一些地方找到了解决方案。 Editor 类：</t>
         </p>
@@ -132,6 +239,9 @@
         <p>
           <t>导入资源时设置资源属性可阅读：</t>
         </p>
+        <div class="bookmark"><a href="https://docs.unity3d.com/ScriptReference/AssetPostprocessor.OnPostprocessTexture.html">https://docs.unity3d.com/ScriptReference/AssetPostprocessor.OnPostprocessTexture.html</a>
+          <div class="url_detail"></div>
+        </div>
         <p></p>
         <h1>
           <t>二、动效</t>
@@ -148,18 +258,30 @@
         <p>
           <t>DOTween 的官网：</t>
         </p>
+        <div class="bookmark"><a href="http://dotween.demigiant.com/">http://dotween.demigiant.com/</a>
+          <div class="url_detail"></div>
+        </div>
         <p>
           <t>一个 DOTween 系列教程：</t>
         </p>
+        <div class="bookmark"><a href="https://blog.yarsalabs.com/dotween-unity-animation-part1/">https://blog.yarsalabs.com/dotween-unity-animation-part1/</a>
+          <div class="url_detail"></div>
+        </div>
         <p>
           <t>各种动画曲线一览：</t>
         </p>
+        <div class="bookmark"><a href="https://easings.net/">https://easings.net/</a>
+          <div class="url_detail"></div>
+        </div>
         <h2>
           <t>2. 自己写个 Tweener：灵活可控，支持打断动画</t>
         </h2>
         <blockquote>
           <t>数学基础是插值，推荐视频</t>
         </blockquote>
+        <div class="bookmark"><a href="https://www.bilibili.com/video/BV1Ur4y1E7Fv">https://www.bilibili.com/video/BV1Ur4y1E7Fv</a>
+          <div class="url_detail"></div>
+        </div>
         <p>
           <t>在用 DOTween 时发现管理动画打断很不方便，会出现动画突然闪到终点的情况等等；另一方面，在场景切换或物体销毁时，物体的动画没有播放完，DOTween 也会给出安全模式警告。</t>
         </p>
@@ -175,11 +297,19 @@
           <t> 中使用：</t>
         </p>
         <p>
-          <t>Inspector：</t>
+          <t class="bold">Inspector</t>
+          <t>：</t>
         </p>
+        <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/Untitled_5.png">
+          <div class="caption"></div>
+        </div>
         <p>
-          <t>效果：</t>
+          <t>效果</t>
+          <t>：</t>
         </p>
+        <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/sample.gif">
+          <div class="caption"></div>
+        </div>
         <p>
           <t>自己编写 Tweener 的可控性高却繁琐，单程动画自己一般会用 DoTween 实现。</t>
         </p>
@@ -195,6 +325,12 @@
         <p>
           <t>在一次 Ludum Dare 的作品中我用了这个方法实现卡牌动画</t>
         </p>
+        <div class="bookmark"><a href="https://trioduck.itch.io/time-cardmancer">https://trioduck.itch.io/time-cardmancer</a>
+          <div class="url_detail"></div>
+        </div>
+        <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/sample_1.gif">
+          <div class="caption"></div>
+        </div>
         <p>
           <t>无限趋近式的意思是，让希望改变的参数的实际值无限趋近这个目标值。</t>
         </p>
@@ -209,6 +345,9 @@
           <t class="code">Time.deltaTime</t>
           <t> .</t>
         </p>
+        <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/sample_2.gif">
+          <div class="caption"></div>
+        </div>
         <p>
           <t>这种方法会导致物体永远无法达到目标值，动画的停用也需要用差值进行检测。但其管理和实现都很简单，2D 相机跟踪物体用这种方式实现十分方便。</t>
         </p>

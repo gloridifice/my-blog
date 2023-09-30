@@ -1,3 +1,10 @@
 :root{
     font-family: "Glow Sans SC", serif;
 }
+*{
+    transition-duration: .6s;
+    transition-property: color;
+}
+body{
+    transition-property: background-color;
+}
