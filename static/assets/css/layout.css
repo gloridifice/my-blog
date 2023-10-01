@@ -71,7 +71,6 @@ svg *{
 
 .head_cover{
     z-index: -1;
-    opacity: var(--head-cover-opacity);
     padding: 0;
     margin: 0;
     top: 0;
@@ -84,6 +83,7 @@ svg *{
 .head_cover img{
     width: 100%;
     height: 480px;
+    filter: var(--head-cover-filter);
 }
 
 .contents{
@@ -92,4 +92,39 @@ svg *{
     display: flex;
     flex-direction: column;
     margin: 42px auto auto;
+}
+
+footer{
+    margin: 4em 0;
+}
+footer .contact{
+    width: fit-content;
+    margin: auto;
+    padding: 1em 0;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    color: var(--accents-color-2);
+}
+footer .contact h3{
+    margin: .5em 0;
+}
+footer .contact .items{
+    display: flex;
+    flex-direction: row;
+}
+footer .contact .items .item{
+    margin: 5px 10px;
+    cursor: pointer;
+}
+.items .item svg *{
+    fill: var(--text-color);
+    transition: .1s fill;
+}
+.items .item:hover svg *{
+    fill: var(--theme-color-1);
+}
+.outside{
+    text-decoration: underline dashed var(--accents-color-2);
 }

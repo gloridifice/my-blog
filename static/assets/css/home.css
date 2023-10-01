@@ -26,10 +26,21 @@
 .blog_previews_wrapper{
     margin: 10px auto;
 }
+.type_name_wrapper{
+    display: flex;
+    flex-direction: row;
+}
 .type_name{
     width: fit-content;
     margin: 0 auto;
     pointer-events: none;
     color: var(--accents-color-2);
     font-weight: 400;
+}
+
+.type_name .is_selected{
+    font-weight: 600;
+}
+.type_name .not_selected{
+    font-weight: 600;
 }
