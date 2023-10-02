@@ -1,5 +1,6 @@
 :root{
     font-family: "Glow Sans SC", serif;
+    --monospace-font: 'IBM Plex Mono', monospace;
 }
 *{
     transition-duration: .2s;

@@ -28,7 +28,7 @@
       <div class="page_description">
         <h1 class="title">🚈 Blog 页面、样式测试</h1>
         <div class="sub_info">
-          <p class="date">2023-09-30</p>
+          <p class="date">2023-10-02</p>
           <p class="type">Life</p>
         </div>
       </div>
@@ -96,7 +96,7 @@
         <p>
           <t>下面是一张带有说明的图片</t>
         </p>
-        <div class="image_wrapper"><img src="/post/aaaa2dc6-0418-4f70-9e88-9888d8fb9573/Untitled.png">
+        <div class="image_wrapper"><img src="/post/aaaa2dc6-0418-4f70-9e88-9888d8fb9573/img_36742bff-7a37-472f-b8ba-00717797d9bd.png">
           <div class="caption">
             <t>随便写点什么</t>
           </div>
@@ -105,10 +105,51 @@
         <h2>
           <t>下面是Bookmark（我是二级标题）</t>
         </h2>
-        <div class="bookmark"><a href="https://www.bilibili.com/">https://www.bilibili.com/</a>
-          <div class="url_detail"></div>
+        <div class="bookmark_block">
+          <div class="bookmark"><a href="https://www.bilibili.com/">https://www.bilibili.com/</a>
+            <div class="url_detail"></div>
+          </div>
+          <div class="caption">
+            <t>这是 caption</t>
+          </div>
         </div>
         <p></p>
+        <p></p>
+        <p></p>
+        <p>
+          <t>这是 code block</t>
+        </p>
+        <div class="code_block">
+          <div class="code_part">
+            <div class="code_lang">kotlin</div>
+            <div class="code_part_text">
+              <t>fun readChildrenBlocks(currentPath: Path): List&lt;DataBlock&gt;? {
+    val files = currentPath.toFile().listFiles()
+    val dataBlocks = if (currentPath.hasChildren() &amp;&amp; files != null) {
+        val handledFiles = files.filter { file -&gt;
+            file != null &amp;&amp; file.isFile &amp;&amp; file.name.endsWith(&quot;.json&quot;)
+        }.sortedBy { it.name.split('_').first().toInt() }
+        val list = ArrayList&lt;DataBlock&gt;()
+        for (file in handledFiles) {
+            val read = file.readText()
+            val block = NotionClient.defaultJsonSerializer.toBlock(read)
+            val dataBlock = if (block is ImageBlock){
+                ImageDataBlock(block, currentPath)
+            }else{
+                DataBlock(block, currentPath)
+            }
+            list.add(dataBlock)
+        }
+        list
+    } else null
+    return dataBlocks
+}</t>
+            </div>
+          </div>
+          <div class="caption">
+            <t>我是 caption</t>
+          </div>
+        </div>
         <p></p>
       </div>
     </div>

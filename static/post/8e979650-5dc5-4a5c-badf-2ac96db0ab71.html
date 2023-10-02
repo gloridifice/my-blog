@@ -28,7 +28,7 @@
       <div class="page_description">
         <h1 class="title">☁️ UI 设计与开发经验 [Unity] 2023.2.8 版</h1>
         <div class="sub_info">
-          <p class="date">2023-09-30</p>
+          <p class="date">2023-10-02</p>
           <p class="type">Dev</p>
         </div>
       </div>
@@ -61,14 +61,14 @@
         </ul>
         <div class="column_list">
           <div class="column">
-            <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/Untitled.png">
+            <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/img_59ba725a-f097-4ce3-a171-1f033eec5803.png">
               <div class="caption">
                 <t>草图</t>
               </div>
             </div>
           </div>
           <div class="column">
-            <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/QQ_E6_88_AA_E5_9B_BE20230214133518.png">
+            <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/img_4a37e9c6-49a4-4496-88af-3d09903ba5eb.png">
               <div class="caption">
                 <t>成品</t>
               </div>
@@ -77,14 +77,14 @@
         </div>
         <div class="column_list">
           <div class="column">
-            <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/Untitled_1.png">
+            <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/img_248a4f6e-9be5-4897-abdc-2a238a653529.png">
               <div class="caption">
                 <t>草图</t>
               </div>
             </div>
           </div>
           <div class="column">
-            <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/Untitled_2.png">
+            <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/img_7bbbca85-c20b-40d5-9cd1-42bb696f1f9c.png">
               <div class="caption">
                 <t>成品</t>
               </div>
@@ -94,14 +94,14 @@
         </div>
         <div class="column_list">
           <div class="column">
-            <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/Untitled_3.png">
+            <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/img_b8691123-f77a-4f83-bc1c-5e8d4af13ca2.png">
               <div class="caption">
                 <t>草图</t>
               </div>
             </div>
           </div>
           <div class="column">
-            <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/Untitled_4.png">
+            <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/img_66adae4b-c182-4d48-8d26-2c897438565b.png">
               <div class="caption">
                 <t>成品</t>
               </div>
@@ -208,12 +208,47 @@
         <p>
           <t>写好 UI 脚本后使用 CustomEditor 调整 UI 是十分方便的事。</t>
         </p>
-        <div class="bookmark"><a href="https://docs.unity3d.com/Manual/UIE-HowTo-CreateCustomInspector.html">https://docs.unity3d.com/Manual/UIE-HowTo-CreateCustomInspector.html</a>
-          <div class="url_detail"></div>
+        <div class="bookmark_block">
+          <div class="bookmark"><a href="https://docs.unity3d.com/Manual/UIE-HowTo-CreateCustomInspector.html">https://docs.unity3d.com/Manual/UIE-HowTo-CreateCustomInspector.html</a>
+            <div class="url_detail"></div>
+          </div>
+          <div class="caption"></div>
         </div>
         <p>
           <t>不过使用预制体时使用 Editor 会出现无法将改变的参数保存的问题，自己找了一些地方找到了解决方案。 Editor 类：</t>
         </p>
+        <div class="code_block">
+          <div class="code_part">
+            <div class="code_lang">c#</div>
+            <div class="code_part_text">
+              <t>private MyUIComponent componetSelf;
+private void OnEnable()
+{
+    componetSelf = target as MyUIComponent;
+}
+
+public override void OnInspectorGUI()
+{
+    base.OnInspectorGUI();
+
+    //objectSelf 指这个 editor 脚本所对应的组件(target)
+    //objectSelf.TextComponent 是一个例子，指这个预制体内被修改的组件，这里是文字
+    Undo.RecordObject(componetSelf.TextComponent, &quot;descriptive name of this operation&quot;);
+
+    //这里执行需要做的操作，例如修改文字的内容和字号
+    componetSelf.TextComponent.text = EditorGUILayout.TextField(&quot;Name&quot;, componetSelf.TextComponent.text);
+    componetSelf.TextComponent.fontSize = EditorGUILayout.FloatField(&quot;Font Size&quot;, componetSelf.TextComponent.fontSize);
+    
+    //标记文字组件被修改
+    EditorUtility.SetDirty(componetSelf.TextComponent);
+    PrefabUtility.RecordPrefabInstancePropertyModifications(componetSelf.TextComponent);
+    //标记场景中我们的物体被修改
+    EditorSceneManager.MarkSceneDirty(componetSelf.gameObject.scene);
+}</t>
+            </div>
+          </div>
+          <div class="caption"></div>
+        </div>
         <h2>
           <t>资源文件管理</t>
         </h2>
@@ -238,8 +273,11 @@
         <p>
           <t>导入资源时设置资源属性可阅读：</t>
         </p>
-        <div class="bookmark"><a href="https://docs.unity3d.com/ScriptReference/AssetPostprocessor.OnPostprocessTexture.html">https://docs.unity3d.com/ScriptReference/AssetPostprocessor.OnPostprocessTexture.html</a>
-          <div class="url_detail"></div>
+        <div class="bookmark_block">
+          <div class="bookmark"><a href="https://docs.unity3d.com/ScriptReference/AssetPostprocessor.OnPostprocessTexture.html">https://docs.unity3d.com/ScriptReference/AssetPostprocessor.OnPostprocessTexture.html</a>
+            <div class="url_detail"></div>
+          </div>
+          <div class="caption"></div>
         </div>
         <p></p>
         <h1>
@@ -257,20 +295,29 @@
         <p>
           <t>DOTween 的官网：</t>
         </p>
-        <div class="bookmark"><a href="http://dotween.demigiant.com/">http://dotween.demigiant.com/</a>
-          <div class="url_detail"></div>
+        <div class="bookmark_block">
+          <div class="bookmark"><a href="http://dotween.demigiant.com/">http://dotween.demigiant.com/</a>
+            <div class="url_detail"></div>
+          </div>
+          <div class="caption"></div>
         </div>
         <p>
           <t>一个 DOTween 系列教程：</t>
         </p>
-        <div class="bookmark"><a href="https://blog.yarsalabs.com/dotween-unity-animation-part1/">https://blog.yarsalabs.com/dotween-unity-animation-part1/</a>
-          <div class="url_detail"></div>
+        <div class="bookmark_block">
+          <div class="bookmark"><a href="https://blog.yarsalabs.com/dotween-unity-animation-part1/">https://blog.yarsalabs.com/dotween-unity-animation-part1/</a>
+            <div class="url_detail"></div>
+          </div>
+          <div class="caption"></div>
         </div>
         <p>
           <t>各种动画曲线一览：</t>
         </p>
-        <div class="bookmark"><a href="https://easings.net/">https://easings.net/</a>
-          <div class="url_detail"></div>
+        <div class="bookmark_block">
+          <div class="bookmark"><a href="https://easings.net/">https://easings.net/</a>
+            <div class="url_detail"></div>
+          </div>
+          <div class="caption"></div>
         </div>
         <h2>
           <t>2. 自己写个 Tweener：灵活可控，支持打断动画</t>
@@ -278,8 +325,11 @@
         <blockquote>
           <t>数学基础是插值，推荐视频</t>
         </blockquote>
-        <div class="bookmark"><a href="https://www.bilibili.com/video/BV1Ur4y1E7Fv">https://www.bilibili.com/video/BV1Ur4y1E7Fv</a>
-          <div class="url_detail"></div>
+        <div class="bookmark_block">
+          <div class="bookmark"><a href="https://www.bilibili.com/video/BV1Ur4y1E7Fv">https://www.bilibili.com/video/BV1Ur4y1E7Fv</a>
+            <div class="url_detail"></div>
+          </div>
+          <div class="caption"></div>
         </div>
         <p>
           <t>在用 DOTween 时发现管理动画打断很不方便，会出现动画突然闪到终点的情况等等；另一方面，在场景切换或物体销毁时，物体的动画没有播放完，DOTween 也会给出安全模式警告。</t>
@@ -290,23 +340,117 @@
         <p>
           <t>我们实现一个类：</t>
         </p>
+        <div class="code_block">
+          <div class="code_part">
+            <div class="code_lang">c#</div>
+            <div class="code_part_text">
+              <t>    [Serializable] // 使可以在 Inspector 编辑
+    public class SimpleTweener
+    {
+        [HideInInspector] public float time; // 动画的当前时间
+        public float duration; //动画的持续时长
+        public AnimationCurve curve; //动画曲线
+
+        private bool isActive; //是否正在进行
+        private bool isPositive; //是否进行正向计时
+
+        public float ProgressRate =&gt; time / duration; //动画播放的进度
+
+        public Action&lt;float&gt; doAnimation = (value) =&gt; { };
+
+        public void Update()
+        {
+            if (isActive)
+            {
+                time = isPositive ? 
+                    Mathf.Min(time + Time.deltaTime, duration) : 
+                    Mathf.Max(time - Time.deltaTime, 0);
+                
+                if (time == 0 || time == duration) isActive = false;
+                
+                float result = curve.Evaluate(ProgressRate); //对曲线进行采样
+                doAnimation.Invoke(result);
+            }
+        }
+
+        public void Start()
+        {
+            isActive = true;
+            isPositive = true;
+        }
+
+        public void Stop()
+        {
+            isActive = true;
+            isPositive = false;
+        }
+    }</t>
+            </div>
+          </div>
+          <div class="caption"></div>
+        </div>
         <p>
           <t> 之后我们在自己的 </t>
           <t class="code">MonoBehaviour</t>
           <t> 中使用：</t>
         </p>
+        <div class="code_block">
+          <div class="code_part">
+            <div class="code_lang">c#</div>
+            <div class="code_part_text">
+              <t>public class AnimationTestBehaviour : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+{
+        public SimpleTweener tweener;
+        public Image image;
+
+        private void OnEnable()
+        {
+            tweener.doAnimation += DoTween;
+        }
+        private void OnDisable()
+        {
+            tweener.doAnimation -= DoTween;
+        }
+        
+        private void Update()
+        {
+            tweener.Update();
+        }
+
+        void DoTween(float value)
+        {
+            Color color = image.color;
+            color.a = value;
+            image.color = color;
+            image.transform.localScale = (0.5f + value) * Vector3.one;
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            tweener.Start();
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            tweener.Stop();
+        }
+    }</t>
+            </div>
+          </div>
+          <div class="caption"></div>
+        </div>
         <p>
           <t class="bold">Inspector</t>
           <t>：</t>
         </p>
-        <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/Untitled_5.png">
+        <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/img_48b718f4-36b8-4593-b66a-98957477a113.png">
           <div class="caption"></div>
         </div>
         <p>
           <t>效果</t>
           <t>：</t>
         </p>
-        <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/sample.gif">
+        <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/img_ee6e958b-c32b-4902-83b2-6337b5d90a90.gif">
           <div class="caption"></div>
         </div>
         <p>
@@ -324,10 +468,13 @@
         <p>
           <t>在一次 Ludum Dare 的作品中我用了这个方法实现卡牌动画</t>
         </p>
-        <div class="bookmark"><a href="https://trioduck.itch.io/time-cardmancer">https://trioduck.itch.io/time-cardmancer</a>
-          <div class="url_detail"></div>
+        <div class="bookmark_block">
+          <div class="bookmark"><a href="https://trioduck.itch.io/time-cardmancer">https://trioduck.itch.io/time-cardmancer</a>
+            <div class="url_detail"></div>
+          </div>
+          <div class="caption"></div>
         </div>
-        <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/sample_1.gif">
+        <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/img_58822272-8669-4898-ab69-2d8ac5b1a5cf.gif">
           <div class="caption"></div>
         </div>
         <p>
@@ -336,6 +483,15 @@
         <p>
           <t>以缩放为例，我们设定一个物体缩放的目标值，然后让实际值无限趋近这个目标值：</t>
         </p>
+        <div class="code_block">
+          <div class="code_part">
+            <div class="code_lang">c#</div>
+            <div class="code_part_text">
+              <t>float value = Mathf.Lerp(currentSize, targetSize, speed);</t>
+            </div>
+          </div>
+          <div class="caption"></div>
+        </div>
         <p>
           <t class="code">speed</t>
           <t> 是趋近的速度，在 0 ~ 1 之间。在 Update 中调用的话，记得将</t>
@@ -344,7 +500,20 @@
           <t class="code">Time.deltaTime</t>
           <t> .</t>
         </p>
-        <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/sample_2.gif">
+        <div class="code_block">
+          <div class="code_part">
+            <div class="code_lang">c#</div>
+            <div class="code_part_text">
+              <t>public void Update(){
+  float currentSize = transform.localScale.x;
+  currentSize = Mathf.Lerp(currentSize, targetSize, speed * (Time.deltaTime * 50f));
+  image.transform.localScale = currentSize * Vector3.one;
+}</t>
+            </div>
+          </div>
+          <div class="caption"></div>
+        </div>
+        <div class="image_wrapper"><img src="/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71/img_5b1adc5b-da7e-4460-a1c7-a4b43b99af35.gif">
           <div class="caption"></div>
         </div>
         <p>

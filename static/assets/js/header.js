@@ -14,6 +14,37 @@ if (visualMode == null) {
     setVisualMode(getInitVisualMode());
 }
 window.addEventListener("load", function (ev) {
+    addVisualButtonEvent();
+    addTypeButtonEvent();
+});
+function addTypeButtonEvent() {
+    var typeButtons = document.querySelectorAll(".post_type_button");
+    var selectedClassName = "is_selected";
+    typeButtons.forEach(function (button) {
+        button.addEventListener("click", function (evt) {
+            var selfIsSelected = button.classList.contains(selectedClassName);
+            if (selfIsSelected)
+                return;
+            typeButtons.forEach(function (other) {
+                other.classList.remove(selectedClassName);
+            });
+            button.classList.add(selectedClassName);
+            var selfPreviewsId = button.id.split('_')[0] + "_type_previews";
+            var hiddenClassName = "hidden";
+            document.querySelectorAll(".post_type_previews").forEach(function (previews) {
+                if (previews.id != selfPreviewsId) {
+                    if (!previews.classList.contains(hiddenClassName))
+                        previews.classList.add(hiddenClassName);
+                }
+                else {
+                    if (previews.classList.contains(hiddenClassName))
+                        previews.classList.remove(hiddenClassName);
+                }
+            });
+        });
+    });
+}
+function addVisualButtonEvent() {
     var its = document.querySelectorAll(".switch_visual_mode_button");
     console.log(its);
     its === null || its === void 0 ? void 0 : its.forEach(function (it) {
@@ -21,7 +52,7 @@ window.addEventListener("load", function (ev) {
             switchVisualMode();
         });
     });
-});
+}
 function switchVisualMode() {
     if (currentVisualMode === VisualMode.Light) {
         setVisualMode(VisualMode.Dark);
