@@ -4,11 +4,12 @@
     --accents-color-1: #70706f;
     --accents-color-2: #adaba7;
     --accents-color-3: #d2d1ce;
+    --accents-color-4: #e3e2df;
     --theme-color: #c54c1c;
     --theme-color-1: #ce7858;
     --theme-color-2: #f3c9bb;
     --reverse-text-color: #FFF;
-    --bg-color: #F1EEEB;
+    --bg-color: #f1edea;
     --navbar-bg-color: rgb(19 20 20/6%);
 
     --navbar-height: 49px;
@@ -16,8 +17,8 @@
     --shadow-color-1: rgb(0 0 0/4%);
     --hlt-color-1: rgb(255 255 255/25%);
 
-    --inline-code-color-bg: rgba(218, 180, 163, 0.56);
-    --inline-code-color-text: rgb(140, 57, 13);
+    --inline-code-color-bg: rgba(217, 174, 157, 0.56);
+    --inline-code-color-text: rgb(164, 61, 5);
 
     --head-cover-filter: opacity(.75);
 }
