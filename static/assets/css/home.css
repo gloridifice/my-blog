@@ -1,16 +1,63 @@
 .introduce {
   margin: 10px auto;
 }
-
 .introduce h1 {
   margin-bottom: 0;
   color: var(--emphasized-color);
 }
-
 .introduce h2 {
   color: var(--theme-color);
   font-weight: 400;
   margin-top: 0;
+}
+.introduce h3 {
+  color: var(--accents-color-1);
+  font-weight: 300;
+  margin: 8px auto;
+}
+.introduce .outside_pages {
+  margin: 16px 0;
+  display: flex;
+  flex-direction: row;
+}
+.introduce .outside_pages .outside_page_item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: fit-content;
+  padding: 4px 8px;
+  border-radius: 7px;
+  margin: 3px;
+  cursor: pointer;
+  transition: 0.2s border-color;
+  border: solid 1px transparent;
+  background-color: var(--hlt-color-1);
+  font-size: 14px;
+  box-shadow: 0 2px 4px var(--shadow-color-1);
+}
+.introduce .outside_pages .outside_page_item .start {
+  display: flex;
+  flex-direction: row;
+}
+.introduce .outside_pages .outside_page_item .start svg {
+  width: 14px;
+  margin-right: 6px;
+}
+.introduce .outside_pages .outside_page_item .start svg * {
+  fill: var(--accents-color-2);
+}
+.introduce .outside_pages .outside_page_item .start .name {
+  height: fit-content;
+  color: var(--accents-color-2);
+  margin: auto 0;
+}
+.introduce .outside_pages .outside_page_item .desc {
+  color: var(--accents-color-1);
+  height: fit-content;
+  margin: auto 0 auto 18px;
+}
+.introduce .outside_pages .outside_page_item:hover {
+  border: solid 1px var(--accents-color-2);
 }
 
 .subIntroduce {
@@ -22,12 +69,6 @@
   border-radius: 6px;
   width: fit-content;
   margin: 0 auto;
-}
-
-.introduce h3 {
-  color: var(--accents-color-1);
-  font-weight: 300;
-  margin: 8px auto;
 }
 
 .title_icon svg * {

@@ -13,10 +13,6 @@
   transition-property: outline-width, background-color, box-shadow;
   cursor: pointer;
 }
-.post_preview :hover {
-  background-color: var(--hlt-color-1);
-  box-shadow: 0 4px 12px var(--shadow-color-1);
-}
 .post_preview .emoji {
   text-shadow: 0 6px 8px var(--shadow-color-1);
   font-size: 36px;
@@ -65,6 +61,11 @@
 }
 .post_preview .info p {
   margin: 0;
+}
+
+.post_preview:hover {
+  background-color: var(--hlt-color-1);
+  box-shadow: 0 4px 12px var(--shadow-color-1);
 }
 
 .post_preview *,
