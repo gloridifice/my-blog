@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/layout.css">
     <link rel="stylesheet" href="/assets/css/post.css">
-    <title>🚈 Blog 页面、样式测试</title>
+    <title>🪗 Kotlin jvm 实现静态博客生成器随记</title>
   </head>
   <body>
     <div class="header">
@@ -32,149 +32,400 @@
       <div class="sidebar_wrapper"></div>
       <div class="contents">
         <div class="page_description">
-          <h1 class="title">🚈 Blog 页面、样式测试</h1>
+          <h1 class="title">🪗 Kotlin jvm 实现静态博客生成器随记</h1>
           <div class="sub_info">
-            <p class="date">2023-10-07</p>
-            <p class="type">Life</p>
+            <p class="date">2023-10-18</p>
+            <p class="type">Dev</p>
           </div>
         </div>
         <div class="page_contents">
-          <h1 id="heading1_0">
-            <t>这是一级标题</t>
-          </h1>
-          <blockquote>
-            <t>在这里写字，这里是引用框
-这是</t>
-            <t>斜体。</t>
-            <t>下划线 </t>
-            <t>删除  </t>
-            <t class="bold">加粗</t>
-          </blockquote>
-          <p></p>
-          <ul>
-            <li>
-              <t>列表</t>
-              <ul>
-                <li>
-                  <t>次列表</t>
-                </li>
-              </ul>
-              <ul>
-                <li>
-                  <t>以上</t>
-                  <ul>
-                    <li>
-                      <t>次次列表</t>
-                    </li>
-                  </ul>
-                  <ul>
-                    <li></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <p></p>
-          <ol>
-            <li>
-              <t>序号列表</t>
-            </li>
-          </ol>
-          <ol>
-            <li>
-              <t>这是二</t>
-              <ol>
-                <li>
-                  <t>A here</t>
-                </li>
-              </ol>
-              <ol>
-                <li>
-                  <t>B here</t>
-                </li>
-              </ol>
-            </li>
-          </ol>
-          <p></p>
-          <h1 id="heading1_1">
-            <t>记得标题不要打冒号</t>
-          </h1>
-          <p>
-            <t>下面是一张带有说明的图片</t>
-          </p>
-          <div class="image_wrapper"><img src="/post/aaaa2dc6-0418-4f70-9e88-9888d8fb9573/img_36742bff-7a37-472f-b8ba-00717797d9bd.png">
-            <div class="caption">
-              <t>随便写点什么</t>
+          <div class="callout">
+            <div class="icon">✒️</div>
+            <div class="text">
+              <t>前言：在 2023 年的国庆假期前，自己在翻修自己的博客，偶然找到了 </t>
+              <t class="href" onclick="window.open('http://super.so/')">super.so</t>
+              <t> 这个根据notion 生成网页的平台。当想自己尝试搭建一个的时候，发现实用的部分都要付费，价格又不低，于是干脆自己写一个。既然能借助顺着 notion 作为数据库的思路，我找到了可以用的 kotlin 库，另外找到了用文件系统直接将 html 写入本地文件的样例，于是自己写博客生成器的历程就开始了。Kotlin 是一门很舒服的语言，这一点给我写博客生成器带来了很多舒适和便利，以及快乐。</t>
             </div>
           </div>
           <p></p>
-          <h2 id="heading2_0">
-            <t>下面是Bookmark（我是二级标题）</t>
-          </h2>
+          <h1 id="heading1_0">
+            <t>零、用kotlin写博客生成器</t>
+          </h1>
+          <p>
+            <t>什么是 Kotlin？</t>
+          </p>
           <div class="bookmark_block">
-            <div class="bookmark"><a href="https://www.bilibili.com/">https://www.bilibili.com/</a>
+            <div class="bookmark"><a href="https://kotlinlang.org/">https://kotlinlang.org/</a>
               <div class="url_detail"></div>
             </div>
-            <div class="caption">
-              <t>这是 caption</t>
-            </div>
+            <div class="caption"></div>
           </div>
-          <p></p>
-          <div class="todo_block">
-            <div class="icon"><?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg width="100%" height="100%" viewBox="0 0 47 47" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><path d="M46.145,8.688l0,28.776c0,4.783 -3.883,8.666 -8.666,8.666l-28.776,-0c-4.783,-0 -8.666,-3.883 -8.666,-8.666l0,-28.776c0,-4.783 3.883,-8.666 8.666,-8.666l28.776,-0c4.783,-0 8.666,3.883 8.666,8.666Zm-5,-0c0,-2.023 -1.643,-3.666 -3.666,-3.666l-28.776,-0c-2.023,-0 -3.666,1.643 -3.666,3.666l0,28.776c0,2.023 1.643,3.666 3.666,3.666l28.776,-0c2.023,-0 3.666,-1.643 3.666,-3.666l0,-28.776Z"/></svg></div>
-            <div class="text">
-              <t> todo也是可以写的</t>
-            </div>
-          </div>
-          <div class="todo_block checked">
-            <div class="icon"><?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg width="100%" height="100%" viewBox="0 0 47 47" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><path d="M46.145,8.748l0,28.775c0,4.783 -3.883,8.666 -8.666,8.666l-28.776,0c-4.783,0 -8.666,-3.883 -8.666,-8.666l0,-28.775c0,-4.783 3.883,-8.667 8.666,-8.667l28.776,0c4.783,0 8.666,3.884 8.666,8.667Zm-26.05,14.494l-6.423,-6.423l-6.306,6.306l6.423,6.423l-0.04,0.04l6.081,6.081l18.986,-18.987l-6.081,-6.081l-12.64,12.641Z"/></svg></div>
-            <div class="text">
-              <t>要做的事情有点多</t>
-            </div>
-          </div>
-          <p></p>
-          <div class="callout">
-            <div class="icon">💡</div>
-            <div class="text">
-              <t>Callout 的效果是这样的</t>
-            </div>
-          </div>
-          <p></p>
           <p>
-            <t>这是 code block</t>
+            <t>我的项目各部分的分工如下：</t>
+          </p>
+          <ul>
+            <li>
+              <t>Kotlin-jvm：前端生成器</t>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <t>Notion：数据库</t>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <t>Typescript：编译为 JavaScript</t>
+            </li>
+          </ul>
+          <h1 id="heading1_1">
+            <t>一、开发环境配置</t>
+          </h1>
+          <p>
+            <t>用到的 kotlin 库：</t>
+          </p>
+          <ul>
+            <li>
+              <t class="href bold" onclick="window.open('https://github.com/Kotlin/kotlinx.html#kotlinxhtml')">kotlinx.html</t>
+              <t>: A kotlinx.html library provides DSL to build HTML to </t>
+              <t class="href" onclick="window.open('https://docs.oracle.com/javase/8/docs/api/java/io/Writer.html')">Writer</t>
+              <t>/</t>
+              <t class="href" onclick="window.open('https://docs.oracle.com/javase/8/docs/api/java/lang/Appendable.html')">Appendable</t>
+              <t> or DOM.</t>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <t class="href bold" onclick="window.open('https://github.com/seratch/notion-sdk-jvmhttps://github.com/seratch/notion-sdk-jvm')">notion-sdk-jvm</t>
+              <t>: A </t>
+              <t class="href" onclick="window.open('https://developers.notion.com/')">Notion API</t>
+              <t> SDK for any JVM language users.</t>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <t class="href bold" onclick="window.open('https://github.com/ajalt/mordant')">mordant</t>
+              <t>: Colorful styling for command-line applications.</t>
+            </li>
+          </ul>
+          <div class="code_block">
+            <div class="code_part">
+              <div class="code_lang">kotlin</div>
+              <div class="code_part_text">
+                <t>dependencies {
+    testImplementation(kotlin(&quot;test&quot;))
+
+    val kotlinxHtmlVersion = &quot;0.9.1&quot;
+    val notionSdkVersion = &quot;1.9.0&quot;
+    val mordantVersion = &quot;2.1.0&quot;
+
+    implementation(&quot;org.jetbrains.kotlinx:kotlinx-html-jvm:${kotlinxHtmlVersion}&quot;)
+    implementation(&quot;com.github.seratch:notion-sdk-jvm-core:${notionSdkVersion}&quot;)
+    implementation(&quot;com.github.ajalt.mordant:mordant:${mordantVersion}&quot;)
+}</t>
+              </div>
+            </div>
+            <div class="caption"></div>
+          </div>
+          <h1 id="heading1_2">
+            <t>二、从 Notion 数据库抓取数据</t>
+          </h1>
+          <p>
+            <t>使用 notion-sdk-jvm 库从 Notion 获取数据需要获得 Notion 的 Token</t>
+          </p>
+          <p>
+            <t class="href" onclick="window.open('https://www.notion.so/my-integrations')">https://www.notion.so/my-integrations</t>
+          </p>
+          <p>
+            <t>在 Integration 中获取 token 后，就可以实例化 </t>
+            <t class="code">NotionClient</t>
+            <t> 类了，为了保证数据安全，请将 token 存在环境变量中，通常使用 </t>
+            <t class="code">NOTION_TOKEN</t>
+            <t> 作为变量名。</t>
           </p>
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">kotlin</div>
               <div class="code_part_text">
-                <t>fun readChildrenBlocks(currentPath: Path): List&lt;DataBlock&gt;? {
-    val files = currentPath.toFile().listFiles()
-    val dataBlocks = if (currentPath.hasChildren() &amp;&amp; files != null) {
-        val handledFiles = files.filter { file -&gt;
-            file != null &amp;&amp; file.isFile &amp;&amp; file.name.endsWith(&quot;.json&quot;)
-        }.sortedBy { it.name.split('_').first().toInt() }
-        val list = ArrayList&lt;DataBlock&gt;()
-        for (file in handledFiles) {
-            val read = file.readText()
-            val block = NotionClient.defaultJsonSerializer.toBlock(read)
-            val dataBlock = if (block is ImageBlock){
-                ImageDataBlock(block, currentPath)
-            }else{
-                DataBlock(block, currentPath)
-            }
-            list.add(dataBlock)
-        }
-        list
-    } else null
-    return dataBlocks
+                <t>val notionToken = System.getenv(&quot;NOTION_TOKEN&quot;);
+NotionClient(token = notionToken).use { client -&gt;
+    //Do
 }</t>
               </div>
             </div>
-            <div class="caption">
-              <t>我是 caption</t>
+            <div class="caption"></div>
+          </div>
+          <p>
+            <t class="code">NotionClient</t>
+            <t> 中有很多获取数据的方法，其中每种数据获取方式的具体信息可以看 </t>
+            <t class="href" onclick="window.open('https://developers.notion.com/')">Notion API</t>
+          </p>
+          <p></p>
+          <h1 id="heading1_3">
+            <t>三、数据的保存与动态更新</t>
+          </h1>
+          <h2 id="heading2_0">
+            <t>数据的序列化和反序列化</t>
+          </h2>
+          <p>
+            <t>notion-sdk-jvm 的反序列化功能写在</t>
+            <t class="code">NotionJsonSerializer</t>
+            <t> 及其子类中，可以直接调用  </t>
+            <t class="code">NotionClient.defaultJsonSerializer</t>
+            <t> 来反序列化。</t>
+          </p>
+          <p>
+            <t>notion-sdk-jvm 并没有提供直接获得 json 数据的 api，所有的方法返回的都是反序列化好的 Kotlin 对象。因此我从其 api 中将需要的内容摘了出来，改为直接返回 body : String 而不进行反序列化。</t>
+          </p>
+          <div class="image_wrapper"><img src="/post/e35194f0-02fa-41ff-8eaa-331ba3b4b18b/img_3c0b7091-b443-40be-a165-448d515061b9.png">
+            <div class="caption"></div>
+          </div>
+          <p>
+            <t>然后通过文件系统写入本地就可以了。</t>
+          </p>
+          <h2 id="heading2_1">
+            <t>数据的保存结构</t>
+          </h2>
+          <p>
+            <t>获取数据后，我保存到了一个本地文件夹中，其结构大概如下</t>
+          </p>
+          <div class="code_block">
+            <div class="code_part">
+              <div class="code_lang">kotlin</div>
+              <div class="code_part_text">
+                <t>notionData
+  - database.json
+  - queryDatabaseResult.json
+  - a.json //某个文章的id
+  -&gt; a //某个文章的id的文件夹，递归地存储block内容
+    - b.json
+    - img_b.png //如果某个block是图片，则存储图片资源以img_id的格式</t>
+              </div>
             </div>
+            <div class="caption"></div>
+          </div>
+          <div class="image_wrapper"><img src="/post/e35194f0-02fa-41ff-8eaa-331ba3b4b18b/img_4d7d33d8-558d-43f6-907b-f89ac68da385.png">
+            <div class="caption"></div>
+          </div>
+          <h2 id="heading2_2">
+            <t>动态更新数据</t>
+          </h2>
+          <p>
+            <t>在获取数据时，可以通过比对最近更新时间 lastEditedTime，来判断是否需要更新该 page 或 block</t>
+          </p>
+          <div class="code_block">
+            <div class="code_part">
+              <div class="code_lang">kotlin</div>
+              <div class="code_part_text">
+                <t>private fun isBlockNeedToUpdate(block: Block, parentPath: Path): Boolean {
+      val pageFile = parentPath.childPath(block.id!! + &quot;.json&quot;).toFile()
+        if (pageFile.exists() &amp;&amp; pageFile.isFile) {
+            val existPage = client.jsonSerializer.toBlock(pageFile.readText())
+            if (existPage.lastEditedTime == block.lastEditedTime)
+                return false
+        }
+        return true
+    }</t>
+              </div>
+            </div>
+            <div class="caption"></div>
+          </div>
+          <p>
+            <t>这样规避了很多不必要的请求，更新效率提升。</t>
+          </p>
+          <h1 id="heading1_4">
+            <t>四、用 Kotlin 生成 Html</t>
+          </h1>
+          <h2 id="heading2_3">
+            <t>数据准备</t>
+          </h2>
+          <p>
+            <t>既然我们将 notion 数据存在了本地，我们用自己定的规则再将其读取成自己设计的 Kotlin 对象就好了。</t>
+          </p>
+          <h2 id="heading2_4">
+            <t>写入 html</t>
+          </h2>
+          <p>
+            <t>使用 </t>
+            <t class="code">FileWriter#appendHTML().html{}</t>
+            <t> 的方式就可以写入 kotlinx.html 的 </t>
+            <t class="code">HTML</t>
+            <t> 对象了，kotlinx.html 写 html 是很舒服的事情，使用方法可以看其主页：</t>
+            <t class="href" onclick="window.open('https://github.com/Kotlin/kotlinx.html')">https://github.com/Kotlin/kotlinx.html</t>
+          </p>
+          <div class="code_block">
+            <div class="code_part">
+              <div class="code_lang">kotlin</div>
+              <div class="code_part_text">
+                <t>filewriter.appendHTML().html {
+    head{
+      //...
+    }
+    body{
+      //...
+    }
+}
+filewriter.close()</t>
+              </div>
+            </div>
+            <div class="caption"></div>
           </div>
           <p></p>
+          <h1 id="heading1_5">
+            <t>五、CSS （SCSS）和 js（Typescript 编译）</t>
+          </h1>
+          <p></p>
+          <h2 id="heading2_5">
+            <t>SCSS → CSS</t>
+          </h2>
+          <p>
+            <t>CSS 我使用了 SCSS 编译成 CSS</t>
+          </p>
+          <blockquote>
+            <t>SCSS 是 Sass 兼容 css 的版本，其后缀名为 .scss，SCSS 较 CSS 拥有更丰富的语言特性，同时向下兼容 CSS</t>
+          </blockquote>
+          <p>
+            <t>我的项目最开始用原生 CSS 书写，为了方便迁移和使用 IDE 的自动格式化，我选择了 SCSS</t>
+          </p>
+          <div class="bookmark_block">
+            <div class="bookmark"><a href="https://sass-lang.com/">https://sass-lang.com/</a>
+              <div class="url_detail"></div>
+            </div>
+            <div class="caption">
+              <t>Sass 官网</t>
+            </div>
+          </div>
+          <h3 id="heading3_0">
+            <t>安装 Sass</t>
+          </h3>
+          <p>
+            <t>用 npm 安装 sass</t>
+          </p>
+          <blockquote>
+            <t>如果你不了解 npm，请见 </t>
+            <t class="href" onclick="window.open('https://www.npmjs.com/')">https://www.npmjs.com/</t>
+          </blockquote>
+          <div class="code_block">
+            <div class="code_part">
+              <div class="code_lang">shell</div>
+              <div class="code_part_text">
+                <t>npm install -g sass</t>
+              </div>
+            </div>
+            <div class="caption"></div>
+          </div>
+          <div class="callout">
+            <div class="icon">💡</div>
+            <div class="text">
+              <t>SCSS 是 Sass 的一种格式，因此我们需要安装 Sass；
+另外，本文中 SCSS 大写，Sass 驼峰 是遵从 Sass 官网的格式</t>
+            </div>
+          </div>
+          <h3 id="heading3_1">
+            <t>编译 SCSS</t>
+          </h3>
+          <p>
+            <t>使用命令实时编译 -w (--watch) 参数的意思是实时监视文件变动并编译</t>
+          </p>
+          <p>
+            <t class="code">&lt;input&gt;</t>
+            <t> </t>
+            <t class="code">&lt;output&gt;</t>
+            <t> 可以是 .scss/.sass/.css 文件，也可以是文件夹；</t>
+          </p>
+          <div class="code_block">
+            <div class="code_part">
+              <div class="code_lang">shell</div>
+              <div class="code_part_text">
+                <t>sass --watch &lt;input&gt; &lt;output&gt;</t>
+              </div>
+            </div>
+            <div class="caption"></div>
+          </div>
+          <p></p>
+          <h2 id="heading2_6">
+            <t>TypeScript → JavaScript</t>
+          </h2>
+          <div class="bookmark_block">
+            <div class="bookmark"><a href="https://www.typescriptlang.org/">https://www.typescriptlang.org/</a>
+              <div class="url_detail"></div>
+            </div>
+            <div class="caption">
+              <t>TypeScript 官网</t>
+            </div>
+          </div>
+          <h3 id="heading3_2">
+            <t>安装 TypeScript</t>
+          </h3>
+          <div class="code_block">
+            <div class="code_part">
+              <div class="code_lang">shell</div>
+              <div class="code_part_text">
+                <t>npm install -g typescript --save-dev</t>
+              </div>
+            </div>
+            <div class="caption"></div>
+          </div>
+          <p></p>
+          <h3 id="heading3_3">
+            <t>编译 TypeScript</t>
+          </h3>
+          <p>
+            <t>参照网络上的方法，写了一个脚本来编译一个文件夹下的 TypeScript（mac 环境下）</t>
+          </p>
+          <p>
+            <t class="code">find</t>
+            <t> 后是需要编译的 ts 存放的目录，</t>
+            <t class="code">--outDir</t>
+            <t> 后是输出目录</t>
+          </p>
+          <div class="code_block">
+            <div class="code_part">
+              <div class="code_lang">shell</div>
+              <div class="code_part_text">
+                <t>find ./src/main/typescript/ -name &quot;*.ts&quot; -type f &gt;ts-files.txt
+tsc @ts-files.txt --outDIr ./static/assets/js --removeComments
+rm ts-files.txt</t>
+              </div>
+            </div>
+            <div class="caption">
+              <t>compileTS.sh</t>
+            </div>
+          </div>
+          <p>
+            <t>在 IDEA 的运行选项 → Edit Confihurations 窗口下可以添加配置</t>
+          </p>
+          <div class="image_wrapper"><img src="/post/e35194f0-02fa-41ff-8eaa-331ba3b4b18b/img_4dad0657-1d92-47f1-a3ad-71366d148084.png">
+            <div class="caption"></div>
+          </div>
+          <p></p>
+          <p></p>
+          <h1 id="heading1_6">
+            <t>六、本地服务器调试</t>
+          </h1>
+          <p>
+            <t>本地服务器工具我用的是 http-server</t>
+          </p>
+          <div class="bookmark_block">
+            <div class="bookmark"><a href="https://github.com/http-party/http-server">https://github.com/http-party/http-server</a>
+              <div class="url_detail"></div>
+            </div>
+            <div class="caption">
+              <t>g</t>
+            </div>
+          </div>
+          <p>
+            <t>其安装和使用在 Github 主页写的都十分清楚，不在此赘述</t>
+          </p>
+          <h1 id="heading1_7">
+            <t>结束</t>
+          </h1>
+          <p>
+            <t>至此，博客框架就构建完成了，还有许多待优化的内容，例如现在编译需要运行几个命令和脚本、</t>
+          </p>
+          <p>
+            <t>没有打包系统和资源管理系统等等。不过现在的状态足够自己使用，就没有多研究。</t>
+          </p>
         </div>
       </div>
       <div class="sidebar_wrapper">
@@ -183,13 +434,61 @@
           <div>
             <ul>
               <li class="h1"><a href="#heading1_0">
-                  <t>这是一级标题</t>
+                  <t>零、用kotlin写博客生成器</t>
                 </a></li>
               <li class="h1"><a href="#heading1_1">
-                  <t>记得标题不要打冒号</t>
+                  <t>一、开发环境配置</t>
+                </a></li>
+              <li class="h1"><a href="#heading1_2">
+                  <t>二、从 Notion 数据库抓取数据</t>
+                </a></li>
+              <li class="h1"><a href="#heading1_3">
+                  <t>三、数据的保存与动态更新</t>
                 </a></li>
               <li class="h2"><a href="#heading2_0">
-                  <t>下面是Bookmark（我是二级标题）</t>
+                  <t>数据的序列化和反序列化</t>
+                </a></li>
+              <li class="h2"><a href="#heading2_0">
+                  <t>数据的保存结构</t>
+                </a></li>
+              <li class="h2"><a href="#heading2_0">
+                  <t>动态更新数据</t>
+                </a></li>
+              <li class="h1"><a href="#heading1_4">
+                  <t>四、用 Kotlin 生成 Html</t>
+                </a></li>
+              <li class="h2"><a href="#heading2_0">
+                  <t>数据准备</t>
+                </a></li>
+              <li class="h2"><a href="#heading2_0">
+                  <t>写入 html</t>
+                </a></li>
+              <li class="h1"><a href="#heading1_5">
+                  <t>五、CSS （SCSS）和 js（Typescript 编译）</t>
+                </a></li>
+              <li class="h2"><a href="#heading2_0">
+                  <t>SCSS → CSS</t>
+                </a></li>
+              <li class="h3"><a href="#heading3_0">
+                  <t>安装 Sass</t>
+                </a></li>
+              <li class="h3"><a href="#heading3_1">
+                  <t>编译 SCSS</t>
+                </a></li>
+              <li class="h2"><a href="#heading2_2">
+                  <t>TypeScript → JavaScript</t>
+                </a></li>
+              <li class="h3"><a href="#heading3_2">
+                  <t>安装 TypeScript</t>
+                </a></li>
+              <li class="h3"><a href="#heading3_3">
+                  <t>编译 TypeScript</t>
+                </a></li>
+              <li class="h1"><a href="#heading1_6">
+                  <t>六、本地服务器调试</t>
+                </a></li>
+              <li class="h1"><a href="#heading1_7">
+                  <t>结束</t>
                 </a></li>
             </ul>
           </div>

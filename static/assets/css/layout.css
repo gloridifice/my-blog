@@ -1,3 +1,21 @@
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--theme-color-2);
+  border-radius: 100px;
+  border: solid var(--theme-color-1) 1px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--theme-color);
+}
+
 body {
   background-color: var(--bg-color);
 }
@@ -72,6 +90,7 @@ svg * {
   top: 128px;
   left: 50%;
   transform: translate(-50%, -50%);
+  white-space: nowrap;
   -webkit-text-stroke: 1.5px var(--theme-color);
   font-size: max(min(15vw, 200px), 100px);
   color: transparent;
