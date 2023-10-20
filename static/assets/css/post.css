@@ -76,24 +76,38 @@
   margin-right: 12px;
 }
 .post .contents .page_description {
-  margin: 12px auto;
+  margin: 2em auto;
   max-width: 505px;
 }
 .post .contents .page_description h1 {
   padding: 16px 0;
   margin: 10px 0;
-  border-bottom: solid var(--accents-color-2) 1px;
   color: var(--emphasized-color);
 }
 .post .contents .page_description .sub_info {
   display: flex;
   justify-content: space-between;
-  padding: 0 4px;
+  padding: 0px 4px;
 }
 .post .contents .page_description .sub_info p {
   margin: 0;
-  padding: 0;
+  padding: 4px 8px;
+  background-color: var(--accents-color-3);
+  border-radius: 6px;
   width: fit-content;
+  color: var(--accents-color-1);
+}
+.post .contents .page_description .sub_info .type_tags {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+.post .contents .page_description .sub_info .tag {
+  margin: auto 6px;
+  background-color: var(--accents-color-4);
+}
+.post .contents .page_description .sub_info .type {
+  margin-left: 8px;
 }
 .post .contents .page_contents {
   text-align: justify;
@@ -115,6 +129,12 @@
   font-weight: 700;
   margin-bottom: 10px;
 }
+.post .contents .page_contents p {
+  margin: 10px auto;
+}
+.post .contents .page_contents t {
+  line-height: 1.65em;
+}
 .post .contents .page_contents blockquote {
   margin: 0;
   border-left: solid 3px var(--accents-color-2);
@@ -135,12 +155,12 @@
   margin: 12px 0;
 }
 .post .contents .page_contents .bookmark_block .bookmark {
-  padding: 6px 24px;
+  padding: 8px 16px;
   display: flex;
   justify-content: start;
   max-width: 100%;
   border: dashed var(--accents-color-3);
-  border-radius: 100px;
+  border-radius: 6px;
   margin: 0;
 }
 .post .contents .page_contents .bookmark_block .bookmark a {
@@ -159,8 +179,8 @@
   justify-content: center;
 }
 .post .contents .page_contents .image_wrapper img {
-  border-radius: 10px;
-  border: solid var(--accents-color-2) 2px;
+  border-radius: 8px;
+  border: solid var(--accents-color-3) 1px;
 }
 .post .contents .page_contents .column_list {
   display: flex;
@@ -200,7 +220,7 @@
 }
 .post .contents .page_contents .caption {
   color: var(--accents-color-2);
-  margin: auto;
+  margin: 4px auto;
   width: fit-content;
   font-size: 14px;
 }
@@ -241,6 +261,10 @@
   fill: var(--accents-color-2);
 }
 
+t {
+  white-space: normal;
+}
+
 t.code {
   background-color: var(--inline-code-color-bg);
   color: var(--inline-code-color-text);
@@ -257,6 +281,12 @@ t.bold {
 
 t.italic {
   font-style: italic;
+}
+
+t.href {
+  color: var(--accents-color-2);
+  cursor: pointer;
+  text-decoration: underline solid;
 }
 
 /*# sourceMappingURL=post.css.map */

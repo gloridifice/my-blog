@@ -58,6 +58,16 @@
 }
 .introduce .outside_pages .outside_page_item:hover {
   border: solid 1px var(--accents-color-2);
+  justify-content: center;
+}
+@media only screen and (max-width: 600px) {
+  .introduce .outside_pages {
+    flex-direction: column;
+  }
+  .introduce .outside_pages .outside_page_item {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .subIntroduce {
