@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/layout.css">
     <link rel="stylesheet" href="/assets/css/post.css">
-    <title>🕹️ 异步测试</title>
+    <title>🗄️ rust wgpu app 运行环境和 Phong 渲染管线搭建｜Terre 开发日志 #0001</title>
   </head>
   <body>
     <div class="header">
@@ -32,57 +32,101 @@
       <div class="sidebar_wrapper"></div>
       <div class="contents">
         <div class="page_description">
-          <h1 class="title">🕹️ 异步测试</h1>
+          <h1 class="title">🗄️ rust wgpu app 运行环境和 Phong 渲染管线搭建｜Terre 开发日志 #0001</h1>
           <div class="sub_info">
-            <p class="date">2023-10-21</p>
+            <p class="date">2023-12-08</p>
             <div class="type_tags">
-              <p class="type">Life</p>
+              <p class="type">Terre</p>
             </div>
           </div>
         </div>
         <div class="page_contents">
-          <p>
-            <t>随便写点什么</t>
-          </p>
+          <div class="image_wrapper"><img src="/post/5ba39aa0-ebd1-4f04-96b3-16a55bc4a519/img_492896f4-c48e-4da7-8a16-f327e8d879f9.png">
+            <div class="caption">
+              <t>测试用的环境 </t>
+            </div>
+          </div>
           <h1 id="heading1_0">
-            <t>H1</t>
+            <t>wgpu</t>
           </h1>
+          <div class="bookmark_block">
+            <div class="bookmark" onclick="window.open('https://sotrh.github.io/learn-wgpu/')">
+              <div class="title">Introduction | Learn Wgpu</div>
+              <div class="url">https://sotrh.github.io/learn-wgpu/</div>
+            </div>
+            <div class="caption"></div>
+          </div>
+          <div class="bookmark_block">
+            <div class="bookmark" onclick="window.open('https://whoisryosuke.com/blog/2022/render-pipelines-in-wgpu-and-rust/')">
+              <div class="title">Render Pipelines in wgpu and Rust</div>
+              <div class="url">https://whoisryosuke.com/blog/2022/render-pipelines-in-wgpu-and-rust/</div>
+            </div>
+            <div class="caption"></div>
+          </div>
+          <p>
+            <t>根据上面两教程学会了如何在 wgpu 中搭建渲染管线入门。</t>
+          </p>
           <p></p>
+          <h1 id="heading1_1">
+            <t>noise 库</t>
+          </h1>
           <p>
-            <t>lorm</t>
+            <t>稍稍尝试了一下使用柏林噪声，用的是这个库。</t>
           </p>
-          <p>
-            <t>123213213213</t>
-          </p>
+          <div class="bookmark_block">
+            <div class="bookmark" onclick="window.open('https://github.com/Razaekel/noise-rs')">
+              <div class="title">https://github.com/Razaekel/noise-rs</div>
+              <div class="url">https://github.com/Razaekel/noise-rs</div>
+            </div>
+            <div class="caption"></div>
+          </div>
+          <p></p>
+          <h1 id="heading1_2">
+            <t>现在的临时的生命周期系统</t>
+          </h1>
+          <div class="code_block">
+            <div class="code_part">
+              <div class="code_lang">rust</div>
+              <div class="code_part_text">
+                <t>pub struct App{
+    updates: Vec&lt;Box&lt;dyn Fn(&amp;mut Runtime)&gt;&gt;,
+    starts: Vec&lt;Box&lt;dyn Fn(&amp;mut Runtime)&gt;&gt;,
+}
+
+pub struct Runtime {
+    pub context: GraphicsContext,
+    pub size: winit::dpi::PhysicalSize&lt;u32&gt;,
+
+    pub camera: Camera,
+    pub camera_controller: CameraController,
+    pub input: CursorInput,
+    pub pass: PhongPass,
+    pub nodes: Vec&lt;Node&gt;,
+}
+
+pub async fn run() {
+    App::new()
+        .add_system(Stage::Update, render)
+        .add_system(Stage::Update, update)
+        .run().await;
+}</t>
+              </div>
+            </div>
+            <div class="caption"></div>
+          </div>
+          <h1 id="heading1_3">
+            <t>//TODO</t>
+          </h1>
           <ul>
             <li>
-              <t>34234234324</t>
-              <p>
-                <t>123213213213</t>
-              </p>
-              <p>
-                <t>1243314324234</t>
-              </p>
+              <t>游戏的生命周期系统。</t>
             </li>
           </ul>
-          <p>
-            <t>1243314324234</t>
-          </p>
-          <div class="image_wrapper"><img src="/post/4bbd23f9-64b3-46be-b36b-04a18b5599a9/img_7e38b4b8-c829-4921-91a0-6d577d604c0f.png">
-            <div class="caption"></div>
-          </div>
-          <p>
-            <t>34234234324</t>
-            <p>
-              <t>123213213213</t>
-            </p>
-            <p>
-              <t>1243314324234</t>
-            </p>
-          </p>
-          <div class="image_wrapper"><img src="/post/4bbd23f9-64b3-46be-b36b-04a18b5599a9/img_7e38b4b8-c829-4921-91a0-6d577d604c0f.png">
-            <div class="caption"></div>
-          </div>
+          <ul>
+            <li>
+              <t>尝试搭建一个简单可用的 ECS 系统</t>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="sidebar_wrapper">
@@ -91,7 +135,16 @@
           <div>
             <ul>
               <li class="h1"><a href="#heading1_0">
-                  <t>H1</t>
+                  <t>wgpu</t>
+                </a></li>
+              <li class="h1"><a href="#heading1_1">
+                  <t>noise 库</t>
+                </a></li>
+              <li class="h1"><a href="#heading1_2">
+                  <t>现在的临时的生命周期系统</t>
+                </a></li>
+              <li class="h1"><a href="#heading1_3">
+                  <t>//TODO</t>
                 </a></li>
             </ul>
           </div>
