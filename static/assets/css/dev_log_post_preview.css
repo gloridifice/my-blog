@@ -3,7 +3,7 @@
 }
 
 .dev_log_post_preview {
-  max-width: 505px;
+  max-width: var(--post-preview-max-width);
   position: relative;
   height: 81px;
   width: 100%;
