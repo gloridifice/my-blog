@@ -129,7 +129,8 @@ svg * {
 }
 
 footer {
-  margin: 4em 0;
+  margin: 4em auto;
+  text-align: center;
 }
 footer .contact {
   width: fit-content;
