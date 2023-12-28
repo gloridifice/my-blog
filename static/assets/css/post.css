@@ -122,15 +122,18 @@
 }
 .post .contents .page_contents h2 {
   font-weight: 700;
+  color: var(--emphasized-color);
   width: fit-content;
   margin-bottom: 10px;
 }
 .post .contents .page_contents h3 {
-  font-weight: 700;
+  color: var(--emphasized-color);
+  font-weight: 500;
   margin-bottom: 10px;
 }
 .post .contents .page_contents p {
-  margin: 10px auto;
+  margin: 8px auto;
+  min-height: 12px;
 }
 .post .contents .page_contents t {
   line-height: 1.65em;
@@ -236,7 +239,7 @@
 }
 .post .contents .page_contents .caption {
   color: var(--accents-color-2);
-  margin: 4px auto;
+  margin: 4px;
   width: fit-content;
   font-size: 14px;
 }
