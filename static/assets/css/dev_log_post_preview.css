@@ -1,5 +1,5 @@
 .dev_log_previews_wrapper h3 {
-  color: var(--accents-color-2);
+  color: var(--text-color-0);
 }
 
 .dev_log_post_preview {
@@ -7,11 +7,8 @@
   position: relative;
   height: 81px;
   width: 100%;
-  outline: solid var(--accents-color-3) 1px;
   border-radius: 4px;
   margin: 14px auto;
-  transition-duration: 0.2s;
-  transition-property: outline-width, background-color, box-shadow;
   cursor: pointer;
 }
 .dev_log_post_preview * {
@@ -29,8 +26,6 @@
   width: 128px;
   margin-right: 16px;
   overflow: hidden;
-  border-bottom-left-radius: 4px;
-  border-top-left-radius: 4px;
 }
 .dev_log_post_preview .preview img {
   position: static;
@@ -39,6 +34,7 @@
   height: 100%;
   -o-object-fit: cover;
   object-fit: cover;
+  border-radius: 4px;
 }
 
 .dev_log_post_preview {
@@ -53,7 +49,7 @@
   min-width: 100px;
 }
 .dev_log_post_preview .description h2 {
-  color: var(--text-color);
+  color: var(--text-color-0);
   font-size: 16px;
   margin: 0;
   font-weight: 400;
@@ -75,7 +71,7 @@
 }
 
 .dev_log_post_preview:hover {
-  background-color: var(--hlt-color-1);
+  background-color: var(--bg-color-1);
   box-shadow: 0 4px 12px var(--shadow-color-1);
 }
 

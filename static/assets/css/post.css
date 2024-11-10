@@ -136,7 +136,7 @@
   margin: 6px 0;
   text-align: left;
   font-weight: 400;
-  font-size: 40px;
+  font-size: 34px;
   color: var(--emphasized-color);
 }
 .post .contents .page_description .sub_info {
@@ -172,17 +172,19 @@
   width: 100%;
   padding: 2px 0;
   font-weight: 400;
+  font-size: 28px;
   border-bottom: solid var(--line-color) 1px;
 }
 .post .contents .page_contents h2 {
   font-weight: 400;
   color: var(--text-color-0);
   width: fit-content;
-  margin: 24px 0 12px;
+  margin: 22px 0 12px;
 }
 .post .contents .page_contents h3 {
   color: var(--text-color-0);
   font-weight: 400;
+  font-size: 18px;
   margin-bottom: 10px;
 }
 .post .contents .page_contents p {
