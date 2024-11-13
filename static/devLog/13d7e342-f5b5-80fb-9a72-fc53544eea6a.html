@@ -1,0 +1,455 @@
+<!DOCTYPE html><html>
+  <head lang="zh_CN">
+    <meta http-equiv="Content-Type" content="charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/assets/js/header.js"></script>
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/root.css">
+    <link rel="stylesheet" href="/assets/css/color_scheme_v2.dark_mode.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/layout.css">
+    <link rel="stylesheet" href="/assets/css/post.css">
+    <title>🦆 渲染管线、Depth、Camera、Light、Transform、bevy_ecs｜Wgpu PBR 开发日志 #0000</title>
+  </head>
+  <body>
+    <div class="post">
+      <div class="catalogue">
+        <div>
+          <ul>
+            <li class="h1"><a href="#heading1_0">
+                <t>Mesh</t>
+              </a></li>
+            <li class="h1"><a href="#heading1_1">
+                <t>Material</t>
+              </a></li>
+            <li class="h1"><a href="#heading1_2">
+                <t>Texture</t>
+              </a></li>
+            <li class="h1"><a href="#heading1_3">
+                <t>实现 Camera</t>
+              </a></li>
+            <li class="h1"><a href="#heading1_4">
+                <t>实现 Transform</t>
+              </a></li>
+            <li class="h1"><a href="#heading1_5">
+                <t>实现平行光</t>
+              </a></li>
+            <li class="h1"><a href="#heading1_6">
+                <t>Engine Lifetime</t>
+              </a></li>
+            <li class="h1"><a href="#heading1_7">
+                <t>其它</t>
+              </a></li>
+            <li class="h1"><a href="#heading1_8">
+                <t>相关链接</t>
+              </a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="navi"><a href="/home.html">Home</a><a href="https://gloridifice.notion.site/3659ec2ee2f7498ab744662c364b518a?v=0d711eab95f748eb82a966726ec3f757&amp;pvs=4">Notes</a></div>
+      <div class="sidebar_wrapper_left sidebar_wrapper"></div>
+      <div class="sidebar_wrapper_right sidebar_wrapper"></div>
+      <div class="contents">
+        <div class="page_description">
+          <h1 class="title">🦆 渲染管线、Depth、Camera、Light、Transform、bevy_ecs｜Wgpu PBR 开发日志 #0000</h1>
+          <div class="sub_info">
+            <p class="date">2024-11-13</p>
+          </div>
+        </div>
+        <div class="page_contents">
+          <div class="image_wrapper"><img src="/post/13d7e342-f5b5-80fb-9a72-fc53544eea6a/img_13d7e342-f5b5-809c-80ac-c2531f82e3f7.gif">
+            <div class="caption"></div>
+          </div>
+          <p>
+            <t>Wgpu PBR 是一个旨在用 wgpu 和 rust 建立一个 PBR 渲染管线渲染器的练习项目。未来可能会实现各种其它的图形学效果。</t>
+          </p>
+          <p>
+            <t>其目前使用 Egui 作为 UI，bevy_ecs 库管理逻辑。</t>
+          </p>
+          <blockquote>
+            <t>现阶段展示出的代码为早期开发版本，未来大概率都会被重构</t>
+          </blockquote>
+          <h1 id="heading1_0">
+            <t>Mesh</t>
+          </h1>
+          <p>
+            <t>加载好的模型是如下的包含关系：</t>
+          </p>
+          <p>
+            <t>Model → Mesh → Primitive.</t>
+          </p>
+          <p>
+            <t>Primitive 虽然是模型的最小单位，但是不能被单独渲染，只能在一个 Mesh 被渲染时被渲染。Primitive 是也承载材质的单位。</t>
+          </p>
+          <ul>
+            <li>
+              <t>Model</t>
+              <ul>
+                <li>
+                  <t>UploadedMesh (Vec&lt;_&gt;)</t>
+                  <ul>
+                    <li>
+                      <t>Vertex buffer</t>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li>
+                      <t>Index buffer</t>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li>
+                      <t>UploadedPrimitive (Vec&lt;_&gt;)</t>
+                      <ul>
+                        <li>
+                          <t>indices_start</t>
+                        </li>
+                      </ul>
+                      <ul>
+                        <li>
+                          <t>indices_num</t>
+                        </li>
+                      </ul>
+                      <ul>
+                        <li>
+                          <t>material_instance</t>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <p>
+            <t>目前支持加载 glb 格式的模型。</t>
+          </p>
+          <h1 id="heading1_1">
+            <t>Material</t>
+          </h1>
+          <p>
+            <t>Material 的编程范式本质是组织和管理 Pipeline 和 BindGroup（同时还存储相关的 Layout）。目前项目的材质的 BindGroupLayout 如下：</t>
+          </p>
+          <ol>
+            <li>
+              <t>Transform</t>
+            </li>
+          </ol>
+          <ol>
+            <li>
+              <t>Camera</t>
+            </li>
+          </ol>
+          <ol>
+            <li>
+              <t>Light</t>
+            </li>
+          </ol>
+          <ol>
+            <li>
+              <t>[Material‘s]</t>
+              <ol>
+                <li>
+                  <t>Texture</t>
+                </li>
+              </ol>
+            </li>
+          </ol>
+          <p>
+            <t>Material 范式在这个项目目前是用 Material 和 Material Instance 两个结构体来实现的。</t>
+          </p>
+          <p>
+            <t>一个 Material 提供 </t>
+            <t class="code">Pipeline</t>
+            <t> 和通用的 </t>
+            <t class="code">BindGroup</t>
+            <t> （如 Camera, Light）和定义及存储相关的 </t>
+            <t class="code">Layout</t>
+            <t>，而 Instance 则提供 Instance 之间会有差异的 </t>
+            <t class="code">BindGroup</t>
+            <t> （如 Texture）。</t>
+          </p>
+          <ul>
+            <li>
+              <t>Transform 的 </t>
+              <t class="code">BindGroup</t>
+              <t> 由 </t>
+              <t class="code">MeshRenderer</t>
+              <t> 提供。</t>
+            </li>
+          </ul>
+          <h1 id="heading1_2">
+            <t>Texture</t>
+          </h1>
+          <p>
+            <t>可见 </t>
+            <t class="href" onclick="window.open('https://sotrh.github.io/learn-wgpu/beginner/tutorial5-textures/')">https://sotrh.github.io/learn-wgpu/beginner/tutorial5-textures/</t>
+          </p>
+          <div class="code_block">
+            <div class="code_part">
+              <div class="code_lang">rust</div>
+              <div class="code_part_text">
+                <t>pub struct UploadedImage {
+    pub size: wgpu::Extent3d,
+    pub texture: Texture,
+    pub view: TextureView,
+    pub sampler: Sampler,
+}</t>
+              </div>
+            </div>
+            <div class="caption"></div>
+          </div>
+          <h1 id="heading1_3">
+            <t>实现 Camera</t>
+          </h1>
+          <p>
+            <t>数学库使用 cgmath，Camera 的 View 矩阵 Projection 矩阵可以用 cgmath 快速计算。</t>
+          </p>
+          <div class="code_block">
+            <div class="code_part">
+              <div class="code_lang">rust</div>
+              <div class="code_part_text">
+                <t>impl Camera{
+    ...
+    pub fn build_view_projection_matrix(&amp;self) -&gt; Matrix4&lt;f32&gt; {
+        let view = Matrix4::look_at_rh(self.eye, self.target, self.up);
+        let proj = perspective(cgmath::Deg(self.fovy), self.aspect, self.znear, self.zfar);
+        return OPENGL_TO_WGPU_MATRIX * proj * view;
+    }
+}
+
+#[rustfmt::skip]
+pub const OPENGL_TO_WGPU_MATRIX: cgmath::Matrix4&lt;f32&gt; = cgmath::Matrix4::new(
+    1.0, 0.0, 0.0, 0.0,
+    0.0, 1.0, 0.0, 0.0,
+    0.0, 0.0, 0.5, 0.5,
+    0.0, 0.0, 0.0, 1.0,
+);</t>
+              </div>
+            </div>
+            <div class="caption"></div>
+          </div>
+          <p>
+            <t>因为 OpenGL 中标准化设备坐标（NDC）的深度范围 (z) 为 [-1, 1]，而 wpgu/Vulkan/DX/Mental 中的标准化设备坐标的深度范围为 [0, 1]，cgmath 生成的投影矩阵符合 OpenGL 规范，所以需要一个转换矩阵将深度映射到 [0, 1]。</t>
+          </p>
+          <p>
+            <t>相机相关的 Buffer, BindGroupLayout, BindGroup 存放在 </t>
+            <t class="code">RenderCamera</t>
+            <t> 的 bevy 中的 Resource 管理。在 RenderCamera 初始化时一起生成。</t>
+          </p>
+          <div class="code_block">
+            <div class="code_part">
+              <div class="code_lang">rust</div>
+              <div class="code_part_text">
+                <t>#[derive(Resource)]
+pub struct RenderCamera {
+    pub camera: Camera,
+    pub buffer: Arc&lt;wgpu::Buffer&gt;,
+    pub bind_group_layout: Arc&lt;BindGroupLayout&gt;,
+    pub bind_group: Arc&lt;BindGroup&gt;,
+}</t>
+              </div>
+            </div>
+            <div class="caption"></div>
+          </div>
+          <div class="code_block">
+            <div class="code_part">
+              <div class="code_lang">rust</div>
+              <div class="code_part_text">
+                <t>impl RenderCamera {
+    pub fn new(device: &amp;wgpu::Device, aspect: f32) -&gt; RenderCamera {
+        let camera = Camera::new(aspect);
+        let camera_buffer = device.create_buffer_init(&amp;wgpu::util::BufferInitDescriptor {
+          ...
+        });
+        let camera_bind_group_layout =
+            Arc::new(device.create_bind_group_layout(&amp;CameraUniform::layout_desc()));
+        let camera_bind_group = Arc::new(device.create_bind_group(&amp;wgpu::BindGroupDescriptor {
+          ...
+        }));
+        RenderCamera {
+            camera,
+            buffer: Arc::new(camera_buffer),
+            bind_group_layout: camera_bind_group_layout,
+            bind_group: camera_bind_group,
+        }
+    }
+}</t>
+              </div>
+            </div>
+            <div class="caption"></div>
+          </div>
+          <h1 id="heading1_4">
+            <t>实现 Transform</t>
+          </h1>
+          <blockquote>
+            <t>仅为实现方便才这样实现，不值得参考，寻找参考请见 Bevy 的 Transform 逻辑实现</t>
+          </blockquote>
+          <p>
+            <t>逻辑上的 Transform 如下：</t>
+          </p>
+          <div class="code_block">
+            <div class="code_part">
+              <div class="code_lang">rust</div>
+              <div class="code_part_text">
+                <t>#[derive(Component)]
+pub struct Transform {
+    pub parent: Option&lt;Entity&gt;,
+    pub children: Vec&lt;Entity&gt;,
+    pub position: Point3&lt;f32&gt;,
+    pub rotation: Quaternion&lt;f32&gt;,
+    pub scale: Vector3&lt;f32&gt;,
+}</t>
+              </div>
+            </div>
+            <div class="caption"></div>
+          </div>
+          <p>
+            <t>渲染上，目前 Transform 用 uniform 实现。被传递到 GPU 的 Uniform Buffer 包含一个模型矩阵（用于变换顶点位置）和一个模型的旋转矩阵（用于变换顶点法线）。</t>
+          </p>
+          <p>
+            <t>将数据传递到 gpu 需要对其大小 alignment， 遵循标准布局规则 (std140 或 std430)。在 wgsl 中，其大小被视为如下，用棕色标注了类型大小与 rust 中不同的情况：</t>
+          </p>
+          <p>
+            <t>此外，传入 Buffer 的大小必须时 16 的倍数。因此声明 padding 变量对其数据。</t>
+          </p>
+          <div class="code_block">
+            <div class="code_part">
+              <div class="code_lang">rust</div>
+              <div class="code_part_text">
+                <t>pub struct TransformUniform {
+    pub model: [[f32; 4]; 4],
+    pub rotation: [[f32; 3]; 3],
+    pub padding: [f32; 3],
+}</t>
+              </div>
+            </div>
+            <div class="caption"></div>
+          </div>
+          <p>
+            <t>每个有 Transform 的要被渲染的模型，都有独立的 Transform Buffer 和 BindGroup，所以它们被一起封装到了一个叫 </t>
+            <t class="code">MeshRenderer</t>
+            <t> 的组件中。</t>
+          </p>
+          <div class="code_block">
+            <div class="code_part">
+              <div class="code_lang">rust</div>
+              <div class="code_part_text">
+                <t>#[derive(Component, Default)]
+pub struct MeshRenderer {
+    pub mesh: Option&lt;Arc&lt;UploadedMesh&gt;&gt;,
+    pub transform_bind_group: Option&lt;Arc&lt;BindGroup&gt;&gt;,
+    pub transform_buffer: Option&lt;Arc&lt;Buffer&gt;&gt;,
+}</t>
+              </div>
+            </div>
+            <div class="caption"></div>
+          </div>
+          <h1 id="heading1_5">
+            <t>实现平行光</t>
+          </h1>
+          <p>
+            <t>与 Camera 的实现类似，采用一个 RenderLight 管理。目前只包含一个平行光。</t>
+          </p>
+          <p>
+            <t>传入 GPU 的 LightUniform 结构如下。是否要传 intensity 有待研究。</t>
+          </p>
+          <div class="code_block">
+            <div class="code_part">
+              <div class="code_lang">rust</div>
+              <div class="code_part_text">
+                <t>#[repr(C, align(16))]
+#[derive(Debug, Clone, Copy)]
+pub struct LightUniform {
+    pub direction: [f32; 3],
+    pub padding1: f32,
+    pub color: [f32; 4],
+    pub intensity: f32,
+    pub padding2: [f32; 3],
+}</t>
+              </div>
+            </div>
+            <div class="caption"></div>
+          </div>
+          <p></p>
+          <h1 id="heading1_6">
+            <t>Engine Lifetime</t>
+          </h1>
+          <p>
+            <t>游戏目前采用一套临时的生命周期</t>
+          </p>
+          <div class="code_block">
+            <div class="code_part">
+              <div class="code_lang">rust</div>
+              <div class="code_part_text">
+                <t>input()
+
+handle_redraw()
+  pre_update() // 更新 Time
+  update() //游戏逻辑
+  post_update() // 更新 Unifoms to GPU
+  render() // 渲染</t>
+              </div>
+            </div>
+            <div class="caption">
+              <t>自上而下按执行先后顺序排序，缩进代表函数包含关系</t>
+            </div>
+          </div>
+          <h1 id="heading1_7">
+            <t>其它</t>
+          </h1>
+          <ul>
+            <li>
+              <t>相机的深度贴图被写在 depth_texture 中，未来会用到。</t>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <t>一个简单的 Input 用于记录输入</t>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <t>一个简单的 Time 用于记录 delta time</t>
+            </li>
+          </ul>
+          <p></p>
+          <h1 id="heading1_8">
+            <t>相关链接</t>
+          </h1>
+          <p>
+            <t>【Wgpu 入门资料】</t>
+            <t class="href" onclick="window.open('https://sotrh.github.io/learn-wgpu/')">https://sotrh.github.io/learn-wgpu/</t>
+          </p>
+          <p>
+            <t>【Vulkan 入门资料】</t>
+            <t class="href" onclick="window.open('https://vulkan-tutorial.com/')">https://vulkan-tutorial.com/</t>
+          </p>
+          <p>
+            <t>【以开发游戏引擎的方式学习 Vulkan】</t>
+            <t class="href" onclick="window.open('https://vkguide.dev/')">https://vkguide.dev/</t>
+          </p>
+          <p>
+            <t>【PBR 理论】</t>
+            <t class="href" onclick="window.open('https://learnopengl.com/PBR/Theory')">https://learnopengl.com/PBR/Theory</t>
+          </p>
+          <p>
+            <t>【Bevy Engine】</t>
+            <t class="href" onclick="window.open('https://bevyengine.org/')">https://bevyengine.org/</t>
+          </p>
+          <p>
+            <t>【Egui】</t>
+            <t class="href" onclick="window.open('https://www.egui.rs/')">https://www.egui.rs/</t>
+          </p>
+          <p>
+            <t>【使用模型】</t>
+            <t class="href" onclick="window.open('https://sketchfab.com/3d-models/mkr-lykken-91b274a40ebe46cd931235ac32ae0492')">https://sketchfab.com/3d-models/mkr-lykken-91b274a40ebe46cd931235ac32ae0492</t>
+          </p>
+          <p></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
