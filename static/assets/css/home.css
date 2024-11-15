@@ -10,7 +10,7 @@ body {
 .about {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: space-between;
   position: fixed;
   left: 0;
   top: 0;
@@ -21,11 +21,18 @@ body {
   box-sizing: border-box;
   border: 24px var(--bg-color-0) solid;
   padding: 36px;
+  overflow: auto;
 }
 .about * {
   color: var(--text-color-1);
   font-weight: 200;
   display: block;
+}
+.about .up {
+  justify-content: start;
+}
+.about .down {
+  justify-content: end;
 }
 .about .outside_pages {
   margin: 16px 0;
