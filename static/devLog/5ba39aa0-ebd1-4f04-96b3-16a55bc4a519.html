@@ -14,6 +14,7 @@
     <title>🗄️ rust wgpu app 运行环境和 Phong 渲染管线搭建｜Terre 开发日志 #0001</title>
   </head>
   <body>
+    <script>hljs.highlightAll();</script>
     <div class="post">
       <div class="catalogue">
         <div>
@@ -90,8 +91,7 @@
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">rust</div>
-              <div class="code_part_text">
-                <t>pub struct App{
+              <pre><code class="language-rust">pub struct App{
     updates: Vec&lt;Box&lt;dyn Fn(&amp;mut Runtime)&gt;&gt;,
     starts: Vec&lt;Box&lt;dyn Fn(&amp;mut Runtime)&gt;&gt;,
 }
@@ -112,8 +112,7 @@ pub async fn run() {
         .add_system(Stage::Update, render)
         .add_system(Stage::Update, update)
         .run().await;
-}</t>
-              </div>
+}</code></pre>
             </div>
             <div class="caption"></div>
           </div>

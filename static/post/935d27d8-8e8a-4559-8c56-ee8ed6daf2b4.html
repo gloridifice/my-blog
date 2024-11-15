@@ -9,12 +9,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
+    <script src="/assets/js/highlightjs/highlight.js"></script>
     <link rel="stylesheet" href="/assets/css/layout.css">
     <link rel="stylesheet" href="/assets/css/post.css">
     <link rel="stylesheet" href="/assets/css/color_scheme_v2.dark_mode.css">
+    <link rel="stylesheet" href="/assets/css/highlightjs/github-dark.css">
     <title>💽 游戏开发中的编程理论基础</title>
   </head>
   <body>
+    <script>hljs.highlightAll();</script>
     <div class="post">
       <div class="catalogue">
         <div>
@@ -100,8 +103,7 @@
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">c</div>
-              <div class="code_part_text">
-                <t>int main(){
+              <pre><code class="language-c">int main(){
   //第一个点
   float x1 = 2.0f;
   float y1 = 3.0f;
@@ -110,8 +112,7 @@
   float x2 = 1.0f;
   float y2 = 2.0f;
   float z2 = 0.6f;
-}</t>
-              </div>
+}</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -126,13 +127,11 @@
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">c</div>
-              <div class="code_part_text">
-                <t>struct Vector3 {
+              <pre><code class="language-c">struct Vector3 {
   float x;
   float y;
   float z;
-};</t>
-              </div>
+};</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -176,8 +175,7 @@
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">c#</div>
-              <div class="code_part_text">
-                <t>public class Vector3 {
+              <pre><code class="language-c#">public class Vector3 {
   //成员字段
   public float x;
   public float y;
@@ -189,8 +187,7 @@
     y = 0f;
     z = 0f;
   } 
-}</t>
-              </div>
+}</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -225,13 +222,11 @@
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">c#</div>
-              <div class="code_part_text">
-                <t>void Clear(Vector3 self) {
+              <pre><code class="language-c#">void Clear(Vector3 self) {
   self.x = 0f;
   self.y = 0f;
   self.z = 0f;
-}</t>
-              </div>
+}</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -285,15 +280,13 @@
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">java</div>
-              <div class="code_part_text">
-                <t>class Block {
+              <pre><code class="language-java">class Block {
   String name;
   float explosionResistance; //爆炸抵挡能力
   float destroyTime; //破坏这个方块需要的时间
   Item item;
   ...
-}</t>
-              </div>
+}</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -307,9 +300,7 @@
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">java</div>
-              <div class="code_part_text">
-                <t>Block dirt = new Block(&quot;dirt&quot;,...);</t>
-              </div>
+              <pre><code class="language-java">Block dirt = new Block(&quot;dirt&quot;,...);</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -328,12 +319,10 @@
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">java</div>
-              <div class="code_part_text">
-                <t>Block dirt = new Block(&quot;dirt&quot;,...);
+              <pre><code class="language-java">Block dirt = new Block(&quot;dirt&quot;,...);
 Block stone = new Block(&quot;stone&quot;,...);
 Block leaf = new Block(&quot;leaf&quot;,...);
-...</t>
-              </div>
+...</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -348,12 +337,10 @@ Block leaf = new Block(&quot;leaf&quot;,...);
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">java</div>
-              <div class="code_part_text">
-                <t>//Block class  
+              <pre><code class="language-java">//Block class  
 void spawnDrops(){
 
-}</t>
-              </div>
+}</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -377,26 +364,22 @@ void spawnDrops(){
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">java</div>
-              <div class="code_part_text">
-                <t>class LeafBlock extends Block {
+              <pre><code class="language-java">class LeafBlock extends Block {
   void spawnDrops() {
     //有概率掉落树苗的逻辑
   }
-}</t>
-              </div>
+}</code></pre>
             </div>
             <div class="caption"></div>
           </div>
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">java</div>
-              <div class="code_part_text">
-                <t>class DirtBlock extends Block {
+              <pre><code class="language-java">class DirtBlock extends Block {
   void spawnDrops() {
     //掉落方块物品的逻辑
   }
-}</t>
-              </div>
+}</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -437,8 +420,7 @@ void spawnDrops(){
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">java</div>
-              <div class="code_part_text">
-                <t>public void aiStep() {
+              <pre><code class="language-java">public void aiStep() {
       super.aiStep();
       this.oFlap = this.flap;
       this.oFlapSpeed = this.flapSpeed;
@@ -461,8 +443,7 @@ void spawnDrops(){
          this.gameEvent(GameEvent.ENTITY_PLACE);
          this.eggTime = this.random.nextInt(6000) + 6000;
       }
-   }</t>
-              </div>
+   }</code></pre>
             </div>
             <div class="caption">
               <t>鸡的滑翔逻辑（氛围代码，不需要看懂）</t>
@@ -617,13 +598,11 @@ void spawnDrops(){
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">haskell</div>
-              <div class="code_part_text">
-                <t>min :: (Ord t) =&gt; t -&gt; t -&gt; t
+              <pre><code class="language-haskell">min :: (Ord t) =&gt; t -&gt; t -&gt; t
 min a b = case compare a b of
   LT -&gt; a
   GT -&gt; b
-  EQ -&gt; a</t>
-              </div>
+  EQ -&gt; a</code></pre>
             </div>
             <div class="caption">
               <t>Haskell 语言中取最小值的函数，可以看到我们只限制了 a 和 b 是 Ord 的，也就是可排序的。 </t>

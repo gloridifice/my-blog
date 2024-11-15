@@ -14,6 +14,7 @@
     <title>🦆 渲染管线、Depth、Camera、Light、Transform、bevy_ecs｜Wgpu PBR 开发日志 #0000</title>
   </head>
   <body>
+    <script>hljs.highlightAll();</script>
     <div class="post">
       <div class="catalogue">
         <div>
@@ -190,14 +191,12 @@
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">rust</div>
-              <div class="code_part_text">
-                <t>pub struct UploadedImage {
+              <pre><code class="language-rust">pub struct UploadedImage {
     pub size: wgpu::Extent3d,
     pub texture: Texture,
     pub view: TextureView,
     pub sampler: Sampler,
-}</t>
-              </div>
+}</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -210,8 +209,7 @@
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">rust</div>
-              <div class="code_part_text">
-                <t>impl Camera{
+              <pre><code class="language-rust">impl Camera{
     ...
     pub fn build_view_projection_matrix(&amp;self) -&gt; Matrix4&lt;f32&gt; {
         let view = Matrix4::look_at_rh(self.eye, self.target, self.up);
@@ -226,8 +224,7 @@ pub const OPENGL_TO_WGPU_MATRIX: cgmath::Matrix4&lt;f32&gt; = cgmath::Matrix4::n
     0.0, 1.0, 0.0, 0.0,
     0.0, 0.0, 0.5, 0.5,
     0.0, 0.0, 0.0, 1.0,
-);</t>
-              </div>
+);</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -242,23 +239,20 @@ pub const OPENGL_TO_WGPU_MATRIX: cgmath::Matrix4&lt;f32&gt; = cgmath::Matrix4::n
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">rust</div>
-              <div class="code_part_text">
-                <t>#[derive(Resource)]
+              <pre><code class="language-rust">#[derive(Resource)]
 pub struct RenderCamera {
     pub camera: Camera,
     pub buffer: Arc&lt;wgpu::Buffer&gt;,
     pub bind_group_layout: Arc&lt;BindGroupLayout&gt;,
     pub bind_group: Arc&lt;BindGroup&gt;,
-}</t>
-              </div>
+}</code></pre>
             </div>
             <div class="caption"></div>
           </div>
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">rust</div>
-              <div class="code_part_text">
-                <t>impl RenderCamera {
+              <pre><code class="language-rust">impl RenderCamera {
     pub fn new(device: &amp;wgpu::Device, aspect: f32) -&gt; RenderCamera {
         let camera = Camera::new(aspect);
         let camera_buffer = device.create_buffer_init(&amp;wgpu::util::BufferInitDescriptor {
@@ -276,8 +270,7 @@ pub struct RenderCamera {
             bind_group: camera_bind_group,
         }
     }
-}</t>
-              </div>
+}</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -293,16 +286,14 @@ pub struct RenderCamera {
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">rust</div>
-              <div class="code_part_text">
-                <t>#[derive(Component)]
+              <pre><code class="language-rust">#[derive(Component)]
 pub struct Transform {
     pub parent: Option&lt;Entity&gt;,
     pub children: Vec&lt;Entity&gt;,
     pub position: Point3&lt;f32&gt;,
     pub rotation: Quaternion&lt;f32&gt;,
     pub scale: Vector3&lt;f32&gt;,
-}</t>
-              </div>
+}</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -318,13 +309,11 @@ pub struct Transform {
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">rust</div>
-              <div class="code_part_text">
-                <t>pub struct TransformUniform {
+              <pre><code class="language-rust">pub struct TransformUniform {
     pub model: [[f32; 4]; 4],
     pub rotation: [[f32; 3]; 3],
     pub padding: [f32; 3],
-}</t>
-              </div>
+}</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -336,14 +325,12 @@ pub struct Transform {
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">rust</div>
-              <div class="code_part_text">
-                <t>#[derive(Component, Default)]
+              <pre><code class="language-rust">#[derive(Component, Default)]
 pub struct MeshRenderer {
     pub mesh: Option&lt;Arc&lt;UploadedMesh&gt;&gt;,
     pub transform_bind_group: Option&lt;Arc&lt;BindGroup&gt;&gt;,
     pub transform_buffer: Option&lt;Arc&lt;Buffer&gt;&gt;,
-}</t>
-              </div>
+}</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -359,8 +346,7 @@ pub struct MeshRenderer {
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">rust</div>
-              <div class="code_part_text">
-                <t>#[repr(C, align(16))]
+              <pre><code class="language-rust">#[repr(C, align(16))]
 #[derive(Debug, Clone, Copy)]
 pub struct LightUniform {
     pub direction: [f32; 3],
@@ -368,8 +354,7 @@ pub struct LightUniform {
     pub color: [f32; 4],
     pub intensity: f32,
     pub padding2: [f32; 3],
-}</t>
-              </div>
+}</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -383,15 +368,13 @@ pub struct LightUniform {
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">rust</div>
-              <div class="code_part_text">
-                <t>input()
+              <pre><code class="language-rust">input()
 
 handle_redraw()
   pre_update() // 更新 Time
   update() //游戏逻辑
   post_update() // 更新 Unifoms to GPU
-  render() // 渲染</t>
-              </div>
+  render() // 渲染</code></pre>
             </div>
             <div class="caption">
               <t>自上而下按执行先后顺序排序，缩进代表函数包含关系</t>

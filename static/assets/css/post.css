@@ -278,7 +278,7 @@ body {
   max-width: 50%;
 }
 .post .contents .page_contents .code_block {
-  margin: 1em auto;
+  margin: 0.4em auto;
 }
 .post .contents .page_contents .code_block .code_part {
   background-color: var(--bg-color-1);
@@ -295,12 +295,15 @@ body {
   color: var(--text-color-2);
   font-size: 12px;
 }
-.post .contents .page_contents .code_block .code_part .code_part_text {
+.post .contents .page_contents .code_block .code_part pre {
+  margin: 0;
+}
+.post .contents .page_contents .code_block .code_part pre code {
+  line-height: 1.5em;
+  padding: 0;
   overflow-x: auto;
   font-size: 14px;
-  color: var(--text-color-1);
-}
-.post .contents .page_contents .code_block .code_part .code_part_text t {
+  background-color: var(--bg-color-1);
   white-space: pre;
 }
 .post .contents .page_contents .caption {
@@ -374,10 +377,11 @@ t {
 t.code {
   background-color: var(--inline-code-color-bg);
   color: var(--inline-code-color-text);
+  font-weight: normal;
   border-radius: 0.3em;
-  padding: 0 0.6em;
+  padding: 0 0.4em;
   margin: 0 -0.1em;
-  font-family: var(--monospace-font);
+  font-family: var(--monospace-font), monospace;
   font-size: 0.9em;
 }
 

@@ -9,12 +9,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
+    <script src="/assets/js/highlightjs/highlight.js"></script>
     <link rel="stylesheet" href="/assets/css/layout.css">
     <link rel="stylesheet" href="/assets/css/post.css">
     <link rel="stylesheet" href="/assets/css/color_scheme_v2.dark_mode.css">
+    <link rel="stylesheet" href="/assets/css/highlightjs/github-dark.css">
     <title>🪗 Kotlin jvm 实现静态博客生成器随记</title>
   </head>
   <body>
+    <script>hljs.highlightAll();</script>
     <div class="post">
       <div class="catalogue">
         <div>
@@ -170,8 +173,7 @@
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">kotlin</div>
-              <div class="code_part_text">
-                <t>dependencies {
+              <pre><code class="language-kotlin">dependencies {
     testImplementation(kotlin(&quot;test&quot;))
 
     val kotlinxHtmlVersion = &quot;0.9.1&quot;
@@ -181,8 +183,7 @@
     implementation(&quot;org.jetbrains.kotlinx:kotlinx-html-jvm:${kotlinxHtmlVersion}&quot;)
     implementation(&quot;com.github.seratch:notion-sdk-jvm-core:${notionSdkVersion}&quot;)
     implementation(&quot;com.github.ajalt.mordant:mordant:${mordantVersion}&quot;)
-}</t>
-              </div>
+}</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -211,12 +212,10 @@
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">kotlin</div>
-              <div class="code_part_text">
-                <t>val notionToken = System.getenv(&quot;NOTION_TOKEN&quot;);
+              <pre><code class="language-kotlin">val notionToken = System.getenv(&quot;NOTION_TOKEN&quot;);
 NotionClient(token = notionToken).use { client -&gt;
     //todo
-}</t>
-              </div>
+}</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -260,15 +259,13 @@ NotionClient(token = notionToken).use { client -&gt;
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">kotlin</div>
-              <div class="code_part_text">
-                <t>notionData
+              <pre><code class="language-kotlin">notionData
   - database.json
   - queryDatabaseResult.json
   - a.json //某个文章的id
   -&gt; a //某个文章的id的文件夹，递归地存储block内容
     - b.json
-    - img_b.png //如果某个block是图片，则存储图片资源以img_id的格式</t>
-              </div>
+    - img_b.png //如果某个block是图片，则存储图片资源以img_id的格式</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -284,8 +281,7 @@ NotionClient(token = notionToken).use { client -&gt;
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">kotlin</div>
-              <div class="code_part_text">
-                <t>private fun isBlockNeedToUpdate(block: Block, parentPath: Path): Boolean {
+              <pre><code class="language-kotlin">private fun isBlockNeedToUpdate(block: Block, parentPath: Path): Boolean {
       val pageFile = parentPath.childPath(block.id!! + &quot;.json&quot;).toFile()
         if (pageFile.exists() &amp;&amp; pageFile.isFile) {
             val existPage = client.jsonSerializer.toBlock(pageFile.readText())
@@ -293,8 +289,7 @@ NotionClient(token = notionToken).use { client -&gt;
                 return false
         }
         return true
-    }</t>
-              </div>
+    }</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -321,8 +316,7 @@ NotionClient(token = notionToken).use { client -&gt;
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">kotlin</div>
-              <div class="code_part_text">
-                <t>filewriter.appendHTML().html {
+              <pre><code class="language-kotlin">filewriter.appendHTML().html {
     head{
       //...
     }
@@ -330,8 +324,7 @@ NotionClient(token = notionToken).use { client -&gt;
       //...
     }
 }
-filewriter.close()</t>
-              </div>
+filewriter.close()</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -370,9 +363,7 @@ filewriter.close()</t>
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">shell</div>
-              <div class="code_part_text">
-                <t>npm install -g sass</t>
-              </div>
+              <pre><code class="language-shell">npm install -g sass</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -388,9 +379,7 @@ filewriter.close()</t>
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">shell</div>
-              <div class="code_part_text">
-                <t>sass --watch &lt;input&gt; &lt;output&gt;</t>
-              </div>
+              <pre><code class="language-shell">sass --watch &lt;input&gt; &lt;output&gt;</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -422,9 +411,7 @@ filewriter.close()</t>
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">shell</div>
-              <div class="code_part_text">
-                <t>npm install -g typescript --save-dev</t>
-              </div>
+              <pre><code class="language-shell">npm install -g typescript --save-dev</code></pre>
             </div>
             <div class="caption"></div>
           </div>
@@ -444,11 +431,9 @@ filewriter.close()</t>
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">shell</div>
-              <div class="code_part_text">
-                <t>find ./src/main/typescript/ -name &quot;*.ts&quot; -type f &gt;ts-files.txt
+              <pre><code class="language-shell">find ./src/main/typescript/ -name &quot;*.ts&quot; -type f &gt;ts-files.txt
 tsc @ts-files.txt --outDIr ./static/assets/js --removeComments
-rm ts-files.txt</t>
-              </div>
+rm ts-files.txt</code></pre>
             </div>
             <div class="caption">
               <t>compileTS.sh</t>

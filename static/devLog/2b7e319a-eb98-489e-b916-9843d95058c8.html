@@ -14,6 +14,7 @@
     <title>🦆 UI Framework | egui + wgpu + winit Environment Setup｜Terre 开发日志 #0002</title>
   </head>
   <body>
+    <script>hljs.highlightAll();</script>
     <div class="post">
       <div class="catalogue">
         <div>
@@ -73,8 +74,7 @@
           <div class="code_block">
             <div class="code_part">
               <div class="code_lang">rust</div>
-              <div class="code_part_text">
-                <t>fn render(runtime: &amp;mut Runtime) {
+              <pre><code class="language-rust">fn render(runtime: &amp;mut Runtime) {
     let surface = &amp;runtime.context.surface;
     let device = &amp;runtime.context.device;
     let queue = &amp;runtime.context.queue;
@@ -125,8 +125,7 @@
 
     queue.submit(Some(encoder.finish()));
     output.present();
-}</t>
-              </div>
+}</code></pre>
             </div>
             <div class="caption"></div>
           </div>
