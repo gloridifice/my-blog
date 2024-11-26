@@ -334,8 +334,9 @@ body {
   align-items: center;
   cursor: pointer;
   background-color: var(--bg-color-1);
-  background-image: var(--text-tile-bg-image-blur);
-  border: var(--bg-color-1) 8px solid;
+  background-image: var(--text-tile-bg-image);
+  border-radius: 3px;
+  margin: 12px;
   transition: 0.5s all;
 }
 .elements .element .content.post_preview > * {
@@ -353,8 +354,8 @@ body {
   align-items: center;
 }
 .elements .element .content.post_preview .description .emoji {
-  font-size: 32px;
-  flex-basis: 32px;
+  font-size: 24px;
+  flex-basis: 24px;
 }
 .elements .element .content.post_preview .description h2 {
   color: var(--text-color-0);
@@ -373,8 +374,7 @@ body {
   max-height: 400px;
 }
 .elements .element .content.post_preview:hover {
-  border-color: var(--bg-color-0);
-  background-image: var(--text-tile-bg-image);
+  background-color: var(--bg-color-2);
 }
 .elements .element .content.devlog .preview {
   height: 72px;
