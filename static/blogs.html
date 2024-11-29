@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="/assets/css/layout.css">
     <link rel="stylesheet" href="/assets/css/page_content.css">
     <link rel="stylesheet" href="/assets/css/home.css">
+    <link rel="stylesheet" href="/assets/css/blogs_page.css">
+    <link rel="stylesheet" href="/assets/css/blog_preview.css">
     <link rel="stylesheet" href="/assets/css/scroll_animation.css">
-    <link rel="stylesheet" href="/assets/css/main_home_page.css">
     <title>Koiro's Cat Café</title>
   </head>
   <body>
@@ -39,203 +40,146 @@
       </div>
       <div class="down">
         <div class="navi">
-          <div class="navi row"><a class="navi_link highlighted" href="/home.html">主页</a><a class="navi_link" href="/blogs.html">博客</a><a class="navi_link" href="/about.html">关于</a></div>
+          <div class="navi row"><a class="navi_link" href="/home.html">主页</a><a class="navi_link highlighted" href="/blogs.html">博客</a><a class="navi_link" href="/about.html">关于</a></div>
         </div>
       </div>
     </div>
     <div class="contents_wrapper">
       <div class="contents">
-        <div>top_gap_space</div>
-        <div class="elements">
-          <div class="element reveal">
-            <div class="time">
-              <p>11-18</p>
-            </div>
-            <div class="content active_element">
-              <div class="page_content">
-                <div class="column_list">
-                  <div class="column">
-                    <p>
-                      <t>打算做一个叫做动态的功能，它通常很简短并且可以直接被展示出来。</t>
-                    </p>
-                    <p></p>
-                  </div>
-                  <div class="column">
-                    <div class="image_wrapper"><img src="/active/bbed7c47-52e5-4ea3-905a-515144573a2e/img_1427e342-f5b5-8079-bf5d-db585eed6d41.png">
-                      <div class="caption"></div>
-                    </div>
-                  </div>
+        <div class="top_gap_space"></div>
+        <div class="post_previews_wrapper">
+          <div>
+            <p class="reveal">最近更新</p>
+            <div class="post_preview large reveal" onclick="location.href='/post/a016f0dd-e3c3-439f-adee-54ecf545368b.html';">
+              <div class="title_part">
+                <div class="emoji">📐</div>
+                <h2 class="title">王国之泪 的平面设计</h2>
+              </div>
+              <h3 class="slug">这是一篇社团分享</h3>
+              <div class="info">
+                <p class="date">11-13</p>
+                <div class="type_tags">
+                  <p class="type">Art</p>
                 </div>
-                <p></p>
               </div>
             </div>
           </div>
-          <div class="element reveal">
-            <div class="time">
-              <p>11-13</p>
-            </div>
-            <div class="content post_preview devlog regular" onclick="location.href='/devLog/13d7e342-f5b5-80fb-9a72-fc53544eea6a.html';">
-              <div class="preview"><img src="/devLog/13d7e342-f5b5-80fb-9a72-fc53544eea6a/preview_image_preview_image.gif"></div>
-              <div class="description">
-                <h2 class="title">渲染管线、Depth、Camera、Light、Transform、bevy_ecs｜Wgpu PBR 开发日志 #0000</h2>
+          <div>
+            <p class="reveal">分类</p>
+            <div class="post_type_buttons reveal">
+              <div class="post_type_button is_selected" id="dev_type_button">
+                <h3 class="type_name">DEV</h3>
+              </div>
+              <div class="post_type_button" id="life_type_button">
+                <h3 class="type_name">LIFE</h3>
+              </div>
+              <div class="post_type_button" id="art_type_button">
+                <h3 class="type_name">ART</h3>
               </div>
             </div>
-          </div>
-          <div class="element reveal">
-            <div class="time">
-              <p>04-26</p>
-            </div>
-            <div class="content post_preview regular" onclick="location.href='/post/a016f0dd-e3c3-439f-adee-54ecf545368b.html';">
-              <div class="description">
-                <div class="title">
-                  <h2>王国之泪 的平面设计</h2>
-                  <div class="emoji">📐</div>
+            <div class="post_type_previews" id="dev_type_previews">
+              <div class="post_preview regular reveal" onclick="location.href='/post/935d27d8-8e8a-4559-8c56-ee8ed6daf2b4.html';">
+                <div class="emoji">💽</div>
+                <div class="description">
+                  <h2 class="title">游戏开发中的编程理论基础</h2>
+                  <h3 class="slug">本篇文章为社团分享。作者为宏楼（我）和拉斯普（Aspirin）两人。本文包含游戏开发中一些重要理论的基本概念，包括编程范式、面向对象、组合与继承、面向数据、ECS 的概念和优点以及一些现在市面上游戏引擎的使用的架构。</h3>
                 </div>
-                <h3 class="slug">这是一篇社团分享</h3>
-              </div>
-            </div>
-          </div>
-          <div class="element reveal">
-            <div class="time">
-              <p>04-06</p>
-            </div>
-            <div class="content post_preview regular" onclick="location.href='/post/935d27d8-8e8a-4559-8c56-ee8ed6daf2b4.html';">
-              <div class="description">
-                <div class="title">
-                  <h2>游戏开发中的编程理论基础</h2>
-                  <div class="emoji">💽</div>
+                <div class="info">
+                  <p class="date">04-07</p>
+                  <p class="type">Dev</p>
                 </div>
-                <h3 class="slug">本篇文章为社团分享。作者为宏楼（我）和拉斯普（Aspirin）两人。本文包含游戏开发中一些重要理论的基本概念，包括编程范式、面向对象、组合与继承、面向数据、ECS 的概念和优点以及一些现在市面上游戏引擎的使用的架构。</h3>
               </div>
-            </div>
-          </div>
-          <div class="element reveal">
-            <div class="time">
-              <p>04-05</p>
-            </div>
-            <div class="content post_preview regular" onclick="location.href='/post/6e6d98bd-613b-45f1-afb7-1bb6afb1c3de.html';">
-              <div class="description">
-                <div class="title">
-                  <h2>《怪兽远征》的编辑器工具｜随记 ThinkyCon 2024</h2>
-                  <div class="emoji">🪵</div>
+              <div class="post_preview regular reveal" onclick="location.href='/post/6e6d98bd-613b-45f1-afb7-1bb6afb1c3de.html';">
+                <div class="emoji">🪵</div>
+                <div class="description">
+                  <h2 class="title">《怪兽远征》的编辑器工具｜随记 ThinkyCon 2024</h2>
+                  <h3 class="slug">本编文章是 ThinkyCon 2024 有关怪兽远征编辑器部分的分享的笔记。其对我们正在开发的解秘游戏的关卡编辑器开发提供了不少启发。</h3>
                 </div>
-                <h3 class="slug">本编文章是 ThinkyCon 2024 有关怪兽远征编辑器部分的分享的笔记。其对我们正在开发的解秘游戏的关卡编辑器开发提供了不少启发。</h3>
-              </div>
-            </div>
-          </div>
-          <div class="element reveal">
-            <div class="time">
-              <p>12-24</p>
-            </div>
-            <div class="content post_preview devlog regular" onclick="location.href='/devLog/0a6211ed-b7b4-4e53-b446-cdda5f689219.html';">
-              <div class="description">
-                <h2 class="title">hecs、3D 渲染系统搭建和探索更好的项目结构｜Terre 开发日志 #0003</h2>
-              </div>
-            </div>
-          </div>
-          <div class="element reveal">
-            <div class="time">
-              <p>12-18</p>
-            </div>
-            <div class="content post_preview devlog regular" onclick="location.href='/devLog/2b7e319a-eb98-489e-b916-9843d95058c8.html';">
-              <div class="preview"><img src="/devLog/2b7e319a-eb98-489e-b916-9843d95058c8/preview_image_preview_image.png"></div>
-              <div class="description">
-                <h2 class="title">UI Framework | egui + wgpu + winit Environment Setup｜Terre 开发日志 #0002</h2>
-              </div>
-            </div>
-          </div>
-          <div class="element reveal">
-            <div class="time">
-              <p>12-08</p>
-            </div>
-            <div class="content post_preview devlog regular" onclick="location.href='/devLog/5ba39aa0-ebd1-4f04-96b3-16a55bc4a519.html';">
-              <div class="preview"><img src="/devLog/5ba39aa0-ebd1-4f04-96b3-16a55bc4a519/preview_image_preview_image.png"></div>
-              <div class="description">
-                <h2 class="title">rust wgpu app 运行环境和 Phong 渲染管线搭建｜Terre 开发日志 #0001</h2>
-              </div>
-            </div>
-          </div>
-          <div class="element reveal">
-            <div class="time">
-              <p>12-02</p>
-            </div>
-            <div class="content post_preview regular" onclick="location.href='/post/8dd1e547-9817-447a-9f4b-0824d399e434.html';">
-              <div class="description">
-                <div class="title">
-                  <h2>2023 的秋季做了些什么</h2>
-                  <div class="emoji">🍂</div>
+                <div class="info">
+                  <p class="date">04-05</p>
+                  <p class="type">Dev</p>
                 </div>
-                <h3 class="slug">不知不觉已经到十二月了，喷喷已经更新到 Chill 赛季了。对于时间的认知有些模糊 ，转眼竟然离寒假不远了。</h3>
+              </div>
+              <div class="post_preview regular reveal" onclick="location.href='/post/e35194f0-02fa-41ff-8eaa-331ba3b4b18b.html';">
+                <div class="emoji">🪗</div>
+                <div class="description">
+                  <h2 class="title">Kotlin jvm 实现静态博客生成器随记</h2>
+                  <h3 class="slug">用 kotlin-jvm、notion 和 typescript 实现了自己的静态博客生成器，此博客就是用其生成的。写得过程很愉快。</h3>
+                </div>
+                <div class="info">
+                  <p class="date">2023-12-28</p>
+                  <p class="type">Dev</p>
+                </div>
+              </div>
+              <div class="post_preview regular reveal" onclick="location.href='/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71.html';">
+                <div class="emoji">☁️</div>
+                <div class="description">
+                  <h2 class="title">UI 设计与开发经验 [Unity] 2023.2.8 版</h2>
+                  <h3 class="slug">自我总结</h3>
+                </div>
+                <div class="info">
+                  <p class="date">2023-12-28</p>
+                  <p class="type">Dev</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="element reveal">
-            <div class="time">
-              <p>11-09</p>
-            </div>
-            <div class="content post_preview regular" onclick="location.href='/post/d7162752-54cd-4fa9-a17f-3af513bdadf7.html';">
-              <div class="description">
-                <div class="title">
-                  <h2>GameJam 中的时间管理</h2>
-                  <div class="emoji">⏳</div>
+            <div class="hidden post_type_previews" id="life_type_previews">
+              <div class="post_preview regular reveal" onclick="location.href='/post/8dd1e547-9817-447a-9f4b-0824d399e434.html';">
+                <div class="emoji">🍂</div>
+                <div class="description">
+                  <h2 class="title">2023 的秋季做了些什么</h2>
+                  <h3 class="slug">不知不觉已经到十二月了，喷喷已经更新到 Chill 赛季了。对于时间的认知有些模糊 ，转眼竟然离寒假不远了。</h3>
                 </div>
-                <h3 class="slug">这是一些做 GameJam 时时间管理的方法论，希望它们能在你没有头绪或着遇到困难的时候帮到你。它们不对所有项目和所有人适用，请根据实际情况调整。</h3>
+                <div class="info">
+                  <p class="date">2023-12-28</p>
+                  <p class="type">Life</p>
+                </div>
+              </div>
+              <div class="post_preview regular reveal" onclick="location.href='/post/d7162752-54cd-4fa9-a17f-3af513bdadf7.html';">
+                <div class="emoji">⏳</div>
+                <div class="description">
+                  <h2 class="title">GameJam 中的时间管理</h2>
+                  <h3 class="slug">这是一些做 GameJam 时时间管理的方法论，希望它们能在你没有头绪或着遇到困难的时候帮到你。它们不对所有项目和所有人适用，请根据实际情况调整。</h3>
+                </div>
+                <div class="info">
+                  <p class="date">05-05</p>
+                  <p class="type">Life</p>
+                </div>
+              </div>
+              <div class="post_preview regular reveal" onclick="location.href='/post/0dfb39d7-b496-4048-98c0-b1e503ceab6c.html';">
+                <div class="emoji">💡</div>
+                <div class="description">
+                  <h2 class="title">GameJam 中的灵感发现</h2>
+                  <h3 class="slug">这是一些做 GameJam 时时间管理的方法论，希望它们能在你没有头绪或着遇到困难的时候帮到你。它们不对所有项目和所有人适用，请根据实际情况调整。</h3>
+                </div>
+                <div class="info">
+                  <p class="date">2023-11-10</p>
+                  <p class="type">Life</p>
+                </div>
+              </div>
+              <div class="post_preview regular reveal" onclick="location.href='/post/aaaa2dc6-0418-4f70-9e88-9888d8fb9573.html';">
+                <div class="emoji">🚈</div>
+                <div class="description">
+                  <h2 class="title">Blog 页面、样式测试</h2>
+                  <h3 class="slug">页面样式测试</h3>
+                </div>
+                <div class="info">
+                  <p class="date">11-13</p>
+                  <p class="type">Life</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="element reveal">
-            <div class="time">
-              <p>11-08</p>
-            </div>
-            <div class="content post_preview regular" onclick="location.href='/post/0dfb39d7-b496-4048-98c0-b1e503ceab6c.html';">
-              <div class="description">
-                <div class="title">
-                  <h2>GameJam 中的灵感发现</h2>
-                  <div class="emoji">💡</div>
+            <div class="hidden post_type_previews" id="art_type_previews">
+              <div class="post_preview regular reveal" onclick="location.href='/post/a016f0dd-e3c3-439f-adee-54ecf545368b.html';">
+                <div class="emoji">📐</div>
+                <div class="description">
+                  <h2 class="title">王国之泪 的平面设计</h2>
+                  <h3 class="slug">这是一篇社团分享</h3>
                 </div>
-                <h3 class="slug">这是一些做 GameJam 时时间管理的方法论，希望它们能在你没有头绪或着遇到困难的时候帮到你。它们不对所有项目和所有人适用，请根据实际情况调整。</h3>
-              </div>
-            </div>
-          </div>
-          <div class="element reveal">
-            <div class="time">
-              <p>10-02</p>
-            </div>
-            <div class="content post_preview regular" onclick="location.href='/post/e35194f0-02fa-41ff-8eaa-331ba3b4b18b.html';">
-              <div class="description">
-                <div class="title">
-                  <h2>Kotlin jvm 实现静态博客生成器随记</h2>
-                  <div class="emoji">🪗</div>
+                <div class="info">
+                  <p class="date">11-13</p>
+                  <p class="type">Art</p>
                 </div>
-                <h3 class="slug">用 kotlin-jvm、notion 和 typescript 实现了自己的静态博客生成器，此博客就是用其生成的。写得过程很愉快。</h3>
-              </div>
-            </div>
-          </div>
-          <div class="element reveal">
-            <div class="time">
-              <p>09-30</p>
-            </div>
-            <div class="content post_preview regular" onclick="location.href='/post/aaaa2dc6-0418-4f70-9e88-9888d8fb9573.html';">
-              <div class="description">
-                <div class="title">
-                  <h2>Blog 页面、样式测试</h2>
-                  <div class="emoji">🚈</div>
-                </div>
-                <h3 class="slug">页面样式测试</h3>
-              </div>
-            </div>
-          </div>
-          <div class="element reveal">
-            <div class="time">
-              <p>09-23</p>
-            </div>
-            <div class="content post_preview regular" onclick="location.href='/post/8e979650-5dc5-4a5c-badf-2ac96db0ab71.html';">
-              <div class="description">
-                <div class="title">
-                  <h2>UI 设计与开发经验 [Unity] 2023.2.8 版</h2>
-                  <div class="emoji">☁️</div>
-                </div>
-                <h3 class="slug">自我总结</h3>
               </div>
             </div>
           </div>
