@@ -68,16 +68,19 @@
 .elements .element .content.post_preview:hover {
   background-color: var(--bg-color-2);
 }
+.elements .element .content.devlog {
+  flex-direction: column;
+}
 .elements .element .content.devlog .preview {
-  height: 72px;
-  margin-right: 12px;
+  width: 90%;
+  margin: 24px 24px 0;
 }
 .elements .element .content.devlog .preview img {
-  height: 100%;
+  width: 100%;
   border-radius: 2px;
 }
 .elements .element .content.devlog .description {
-  margin-right: 12px;
+  margin-top: 12px;
 }
 .elements .element .content.devlog .description h2 {
   font-size: 18px;

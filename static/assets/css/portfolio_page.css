@@ -1,0 +1,55 @@
+.project {
+  max-width: 90%;
+  width: 512px;
+  margin: 0 auto;
+  border-top: var(--bg-color-1) solid 1px;
+  padding: 32px 0;
+}
+.project img {
+  width: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+}
+.project .info .title {
+  color: var(--text-color-0);
+  font-weight: normal;
+  font-size: 20px;
+}
+.project .info p {
+  color: var(--text-color-1);
+  font-weight: 200;
+}
+.project .link {
+  padding: 4px 10px;
+  background-color: var(--bg-color-1);
+  width: fit-content;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 6px;
+  gap: 8px;
+}
+.project .link svg {
+  height: 14px;
+  width: 14px;
+}
+.project .link svg * {
+  fill: var(--text-color-0);
+}
+.project .link a {
+  color: var(--text-color-0);
+  text-decoration: underline transparent;
+  cursor: pointer;
+  font-size: 14px;
+  transition: text-decoration 0.3s;
+}
+.project .link a:hover {
+  text-decoration: underline var(--text-color-0);
+}
+
+.dev_log_post_preview {
+  max-width: 96%;
+}
+
+/*# sourceMappingURL=portfolio_page.css.map */

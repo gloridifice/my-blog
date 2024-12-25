@@ -23,9 +23,7 @@
   margin-bottom: 10px;
 }
 .page_content p {
-  color: var(--text-color-1);
   margin: 8px auto;
-  font-weight: 200;
   min-height: 12px;
 }
 .page_content t {
@@ -182,6 +180,8 @@
 
 t {
   white-space: normal;
+  font-weight: 200;
+  color: var(--text-color-1);
 }
 
 t.code {
@@ -215,6 +215,25 @@ t.href {
 t.href:hover {
   color: var(--theme-color);
   text-decoration: underline solid 3px;
+}
+
+.table {
+  width: 100%;
+  height: fit-content;
+  margin: 16px auto;
+}
+.table table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.table table .table_header {
+  background-color: var(--bg-color-1);
+}
+.table table tr td {
+  text-align: left;
+  padding: 10px 12px;
+  border: 1px solid var(--bg-color-2);
 }
 
 /*# sourceMappingURL=page_content.css.map */

@@ -53,15 +53,15 @@
           </ul>
         </div>
       </div>
-      <div class="navi"><a class="navi_link" href="/home.html">主页</a><a class="navi_link" href="/blogs.html">博客</a><a class="navi_link" href="/about.html">关于</a></div>
+      <div class="navi"><a class="navi_link" href="/home.html">主页</a><a class="navi_link" href="/blogs.html">博客</a><a class="navi_link" href="/portfolio.html">项目</a><a class="navi_link" href="/about.html">关于</a></div>
       <div class="sidebar_wrapper_left sidebar_wrapper"></div>
       <div class="sidebar_wrapper_right sidebar_wrapper"></div>
       <div class="contents">
-        <div class="header"><a class="navi_link" href="/home.html">主页</a><a class="navi_link" href="/blogs.html">博客</a><a class="navi_link" href="/about.html">关于</a></div>
+        <div class="header"><a class="navi_link" href="/home.html">主页</a><a class="navi_link" href="/blogs.html">博客</a><a class="navi_link" href="/portfolio.html">项目</a><a class="navi_link" href="/about.html">关于</a></div>
         <div class="page_description">
           <h1 class="title">🦆 渲染管线、Depth、Camera、Light、Transform、bevy_ecs｜Wgpu PBR 开发日志 #0000</h1>
           <div class="sub_info">
-            <p class="date">2024-11-13</p>
+            <p class="date">2024-12-25</p>
           </div>
         </div>
         <div class="page_content">
@@ -308,6 +308,28 @@ pub struct Transform {
           <p>
             <t>将数据传递到 gpu 需要对其大小 alignment， 遵循标准布局规则 (std140 或 std430)。在 wgsl 中，其大小被视为如下，用棕色标注了类型大小与 rust 中不同的情况：</t>
           </p>
+          <div class="table">
+            <table>
+              <tr class="table_header">
+                <td>数据类型 &lt;f32&gt;</td>
+                <td>f32</td>
+                <td>vec2</td>
+                <td>vec3</td>
+                <td>vec4</td>
+                <td>mat3x3</td>
+                <td>mat4x4</td>
+              </tr>
+              <tr>
+                <td>大小 / 字节</td>
+                <td>4</td>
+                <td>8</td>
+                <td>16</td>
+                <td>16</td>
+                <td>48 (3 * vec3)</td>
+                <td>64 (4 * vec3)</td>
+              </tr>
+            </table>
+          </div>
           <p>
             <t>此外，传入 Buffer 的大小必须时 16 的倍数。因此声明 padding 变量对其数据。</t>
           </p>

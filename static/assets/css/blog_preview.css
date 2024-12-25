@@ -1,4 +1,9 @@
-.post_preview {
+.preview *,
+.info * {
+  pointer-events: none;
+}
+
+.preview {
   max-width: var(--post-preview-max-width);
   position: relative;
   height: 81px;
@@ -11,11 +16,11 @@
   background-color: var(--bg-color-1);
   border: solid 1px transparent;
 }
-.post_preview * {
+.preview * {
   display: flex;
   font-weight: normal;
 }
-.post_preview .emoji {
+.preview .emoji {
   text-shadow: 0 6px 8px var(--shadow-color-1);
   font-size: 36px;
   padding: 13px 16px 16px;
@@ -24,18 +29,18 @@
   transition: 0.2s text-shadow;
 }
 
-.post_preview.regular {
+.preview.regular {
   flex-direction: row;
   display: flex;
   justify-content: space-between;
 }
-.post_preview.regular .description {
+.preview.regular .description {
   margin: auto 0;
   flex-direction: column;
   width: 500px;
   min-width: 100px;
 }
-.post_preview.regular .description h2 {
+.preview.regular .description h2 {
   color: var(--text-color-0);
   font-size: 18px;
   margin: 0;
@@ -44,18 +49,18 @@
   white-space: nowrap;
   overflow: hidden;
 }
-.post_preview.regular .description h3 {
+.preview.regular .description h3 {
   font-size: 12px;
   margin: 4px 0 0;
   color: var(--text-color-1);
   font-weight: 200;
 }
-.post_preview.regular .description * {
+.preview.regular .description * {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
-.post_preview.regular .info {
+.preview.regular .info {
   flex-direction: column;
   height: fit-content;
   width: fit-content;
@@ -65,8 +70,27 @@
   font-weight: 400;
   min-width: fit-content;
 }
-.post_preview.regular .info p {
+.preview.regular .info p {
   margin: 0;
+}
+
+.dev_log_post_preview.regular img {
+  margin: 0;
+  width: fit-content;
+}
+.dev_log_post_preview.regular .description {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.dev_log_post_preview.regular .description h2 {
+  margin: 12px;
+  font-size: 16px;
+  white-space: wrap;
+  height: fit-content;
+  max-height: 100%;
+  text-align: left;
 }
 
 .info p {
@@ -74,15 +98,10 @@
   font-family: var(--monospace-font), sans-serif;
 }
 
-.post_preview:hover {
+.preview:hover {
   background-color: var(--bg-color-2);
   border: solid 1px var(--line-color);
   box-shadow: 0 4px 12px var(--shadow-color-1);
-}
-
-.post_preview *,
-.info * {
-  pointer-events: none;
 }
 
 .post_preview.large {
