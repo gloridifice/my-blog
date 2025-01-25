@@ -3,6 +3,16 @@
     <meta http-equiv="Content-Type" content="charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/assets/js/header.js"></script>
+    <script src="/assets/katex/katex.js"></script>
+<script defer src="/assets/katex/auto-render.min.js" onload="renderMathInElement(document.body);"></script>    <script>document.addEventListener(&quot;DOMContentLoaded&quot;, function() {
+    renderMathInElement(document.body, {
+      delimiters: [
+          {left: '$$', right: '$$', display: false},
+      ],
+      throwOnError : false
+    });
+});</script>
+    <link rel="stylesheet" href="/assets/katex/katex.css">
     <link rel="stylesheet" href="/assets/css/reset.css">
     <link rel="stylesheet" href="/assets/css/root.css">
     <link rel="stylesheet" href="/assets/css/color_scheme_v2.dark_mode.css">
@@ -47,6 +57,17 @@
       <div class="contents">
         <div>top_gap_space</div>
         <div class="elements">
+          <div class="element reveal">
+            <div class="time">
+              <p>01-22</p>
+            </div>
+            <div class="content post_preview devlog regular" onclick="location.href='/devLog/1837e342-f5b5-80bc-a170-e6627eae379b.html';">
+              <div class="preview"><img src="/devLog/1837e342-f5b5-80bc-a170-e6627eae379b/preview_image_preview_image.gif"></div>
+              <div class="description">
+                <h2 class="title">延迟渲染管线、微表面 BRDF、法线变换、物体继承树 UI｜Wgpu PBR 开发日志 #0002</h2>
+              </div>
+            </div>
+          </div>
           <div class="element reveal">
             <div class="time">
               <p>12-25</p>

@@ -3,6 +3,16 @@
     <meta http-equiv="Content-Type" content="charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/assets/js/header.js"></script>
+    <script src="/assets/katex/katex.js"></script>
+<script defer src="/assets/katex/auto-render.min.js" onload="renderMathInElement(document.body);"></script>    <script>document.addEventListener(&quot;DOMContentLoaded&quot;, function() {
+    renderMathInElement(document.body, {
+      delimiters: [
+          {left: '$$', right: '$$', display: false},
+      ],
+      throwOnError : false
+    });
+});</script>
+    <link rel="stylesheet" href="/assets/katex/katex.css">
     <link rel="stylesheet" href="/assets/css/reset.css">
     <link rel="stylesheet" href="/assets/css/root.css">
     <link rel="stylesheet" href="/assets/css/color_scheme_v2.dark_mode.css">
@@ -26,6 +36,9 @@
             <li class="h1"><a href="#heading1_0">
                 <t>Mesh</t>
               </a></li>
+            <li class="h2"><a href="#heading2_0">
+                <t>模型的数据结构</t>
+              </a></li>
             <li class="h1"><a href="#heading1_1">
                 <t>Material</t>
               </a></li>
@@ -35,8 +48,17 @@
             <li class="h1"><a href="#heading1_3">
                 <t>实现 Camera</t>
               </a></li>
+            <li class="h2"><a href="#heading2_0">
+                <t>RenderCamera</t>
+              </a></li>
             <li class="h1"><a href="#heading1_4">
                 <t>实现 Transform</t>
+              </a></li>
+            <li class="h2"><a href="#heading2_0">
+                <t>数据大小对齐</t>
+              </a></li>
+            <li class="h2"><a href="#heading2_0">
+                <t>封装</t>
               </a></li>
             <li class="h1"><a href="#heading1_5">
                 <t>实现平行光</t>
@@ -61,7 +83,7 @@
         <div class="page_description">
           <h1 class="title">🦆 渲染管线、Depth、Camera、Light、Transform、bevy_ecs｜Wgpu PBR 开发日志 #0000</h1>
           <div class="sub_info">
-            <p class="date">2024-12-25</p>
+            <p class="date">2025-01-02</p>
           </div>
         </div>
         <div class="page_content">
@@ -89,6 +111,9 @@
           <p>
             <t>Primitive 虽然是模型的最小单位，但是不能被单独渲染，只能在一个 Mesh 被渲染时被渲染。Primitive 是也承载材质的单位。</t>
           </p>
+          <h2 id="heading2_0">
+            <t>模型的数据结构</t>
+          </h2>
           <ul>
             <li>
               <t>Model</t>
@@ -236,6 +261,9 @@ pub const OPENGL_TO_WGPU_MATRIX: cgmath::Matrix4&lt;f32&gt; = cgmath::Matrix4::n
           <p>
             <t>因为 OpenGL 中标准化设备坐标（NDC）的深度范围 (z) 为 [-1, 1]，而 wpgu/Vulkan/DX/Mental 中的标准化设备坐标的深度范围为 [0, 1]，cgmath 生成的投影矩阵符合 OpenGL 规范，所以需要一个转换矩阵将深度映射到 [0, 1]。</t>
           </p>
+          <h2 id="heading2_1">
+            <t>RenderCamera</t>
+          </h2>
           <p>
             <t>相机相关的 Buffer, BindGroupLayout, BindGroup 存放在 </t>
             <t class="code">RenderCamera</t>
@@ -305,6 +333,9 @@ pub struct Transform {
           <p>
             <t>渲染上，目前 Transform 用 uniform 实现。被传递到 GPU 的 Uniform Buffer 包含一个模型矩阵（用于变换顶点位置）和一个模型的旋转矩阵（用于变换顶点法线）。</t>
           </p>
+          <h2 id="heading2_2">
+            <t>数据大小对齐</t>
+          </h2>
           <p>
             <t>将数据传递到 gpu 需要对其大小 alignment， 遵循标准布局规则 (std140 或 std430)。在 wgsl 中，其大小被视为如下，用棕色标注了类型大小与 rust 中不同的情况：</t>
           </p>
@@ -344,6 +375,9 @@ pub struct Transform {
             </div>
             <div class="caption"></div>
           </div>
+          <h2 id="heading2_3">
+            <t>封装</t>
+          </h2>
           <p>
             <t>每个有 Transform 的要被渲染的模型，都有独立的 Transform Buffer 和 BindGroup，所以它们被一起封装到了一个叫 </t>
             <t class="code">MeshRenderer</t>
